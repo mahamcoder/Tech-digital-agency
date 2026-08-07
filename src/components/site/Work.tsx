@@ -15,18 +15,20 @@ export function Work() {
   const y = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
 
   return (
-    <section id="case-studies" ref={ref} className="relative overflow-hidden py-28 md:py-36">
+    <section id="case-studies" ref={ref} className="relative overflow-hidden py-14 md:py-20">
       <motion.div
         style={{ y }}
         className="pointer-events-none absolute inset-x-0 top-1/3 -z-10 mx-auto h-[420px] w-[900px] max-w-[130vw] rounded-full bg-accent/12 blur-[170px]"
       />
 
       <div className="mx-auto max-w-7xl px-5 md:px-10">
-        <Reveal className="max-w-2xl">
+        <Reveal className="max-w-3xl text-left">
           <SectionLabel>Case studies</SectionLabel>
-          <h2 className="mt-6 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl">
-            Outcomes, not
-            <span className="font-serif italic"> impressions</span>
+          <h2 className="mt-6 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
+            Outcomes, Not{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              Impressions
+            </span>
           </h2>
         </Reveal>
 

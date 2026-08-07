@@ -3,12 +3,14 @@ import { useEffect } from "react";
 export function useLenis() {
   useEffect(() => {
     let raf = 0;
-    let lenis: { raf: (t: number) => void; destroy: () => void } | null = null;
+    let lenis: any = null;
     let cancelled = false;
 
     import("lenis").then(({ default: Lenis }) => {
       if (cancelled) return;
       lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+      (window as any).lenis = lenis;
+
       const loop = (time: number) => {
         lenis?.raf(time);
         raf = requestAnimationFrame(loop);
@@ -19,7 +21,10 @@ export function useLenis() {
     return () => {
       cancelled = true;
       cancelAnimationFrame(raf);
-      lenis?.destroy();
+      if (lenis) {
+        lenis.destroy();
+        delete (window as any).lenis;
+      }
     };
   }, []);
 }

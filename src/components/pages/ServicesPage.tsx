@@ -1,7 +1,9 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef, useState } from "react";
+import { motion } from "motion/react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Reveal, SectionLabel } from "@/components/site/Reveal";
+import { PageHero } from "@/components/site/PageHero";
+import { FAQ } from "@/components/site/FAQ";
 import {
   Smartphone,
   Globe2,
@@ -107,6 +109,14 @@ const techStack = [
   { name: "PostgreSQL & Redis", icon: Database },
   { name: "AI Workflows", icon: Sparkles },
   { name: "CI/CD Automation", icon: Zap },
+  { name: "GraphQL & REST", icon: Globe2 },
+  { name: "TypeScript", icon: Code2 },
+  { name: "Firebase & Supabase", icon: Database },
+  { name: "Tailwind CSS", icon: Layers },
+  { name: "Swift & Kotlin", icon: Smartphone },
+  { name: "Terraform & IaC", icon: Wrench },
+  { name: "LangChain & LLMs", icon: Cpu },
+  { name: "Monitoring & APM", icon: ShieldCheck },
 ];
 
 const engagementModels = [
@@ -149,11 +159,6 @@ const engagementModels = [
 ];
 
 export function ServicesPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
-
   const [activeService, setActiveService] = useState(0);
 
   // Estimator state
@@ -165,158 +170,109 @@ export function ServicesPage() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <section ref={heroRef} className="relative isolate overflow-hidden pb-20 pt-32 sm:pt-40 md:pb-32">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute left-[15%] top-[10%] h-[400px] w-[500px] rounded-full bg-primary/12 blur-[160px]" />
-          <div className="absolute right-[10%] top-[30%] h-[300px] w-[400px] rounded-full bg-accent/10 blur-[140px]" />
-        </div>
+      <PageHero
+        badge="CanbeTech Services"
+        aiVariant="services"
+        title={
+          <>
+            Intelligent Software Solutions,{" "}
+            <span className="mt-2 block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              Engineered to Scale
+            </span>
+          </>
+        }
+        description="From AI-powered development workflows and native mobile apps to scalable cloud microservices, CanbeTech delivers end-to-end software solutions tailored for modern enterprises worldwide."
+        primaryCta={{ label: "Start Your Project", to: "/contact" }}
+        secondaryCta={{ label: "Explore Work", to: "/work" }}
+      >
+        {/* Centered Cost Estimator */}
+        <div className="mx-auto max-w-2xl">
+          <div className="glass relative overflow-hidden rounded-[2rem] p-7 sm:p-8 text-left">
+            <div className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-primary/20 blur-[60px]" />
+            <h3 className="font-display text-lg font-semibold tracking-tight text-foreground">
+              Software Team Estimator
+            </h3>
+            <p className="mt-1.5 text-xs text-muted-foreground">
+              Calculate estimated investment for a dedicated CanbeTech engineering pod.
+            </p>
 
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="mx-auto max-w-7xl px-5 md:px-10">
-          <div className="grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease }}
-              >
-                <SectionLabel>CanbeTech Services</SectionLabel>
-              </motion.div>
+            <div className="mt-7 space-y-6">
+              <div>
+                <div className="flex items-baseline justify-between">
+                  <label className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                    Dedicated Engineers
+                  </label>
+                  <span className="font-display text-lg font-semibold text-foreground">
+                    {teamSize} Senior Devs
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={1}
+                  max={10}
+                  step={1}
+                  value={teamSize}
+                  onChange={(e) => setTeamSize(Number(e.target.value))}
+                  className="mt-3 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-primary [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_12px_var(--violet)]"
+                />
+                <div className="mt-1 flex justify-between text-[10px] text-muted-foreground/60">
+                  <span>1 Engineer</span>
+                  <span>10 Engineers</span>
+                </div>
+              </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.1, ease }}
-                className="mt-7 font-display text-[2.5rem] font-semibold leading-[1.06] tracking-[-0.035em] text-foreground sm:text-6xl lg:text-7xl"
-              >
-                Intelligent software solutions,
-                <span className="mt-2 block font-serif text-[0.88em] font-normal italic text-primary">
-                  engineered to scale
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.25, ease }}
-                className="mt-7 max-w-[52ch] text-[15px] leading-[1.8] text-muted-foreground"
-              >
-                From AI-powered development workflows and native mobile apps to scalable cloud microservices,
-                CanbeTech delivers end-to-end software solutions tailored for modern enterprises worldwide.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease }}
-                className="mt-9 flex flex-wrap gap-3"
-              >
-                <Link
-                  to="/contact"
-                  className="btn-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-primary-foreground"
-                >
-                  Start Your Project
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/work"
-                  className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-                >
-                  Explore Work
-                </Link>
-              </motion.div>
+              <div>
+                <div className="flex items-baseline justify-between">
+                  <label className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                    Project Duration
+                  </label>
+                  <span className="font-display text-lg font-semibold text-foreground">
+                    {durationMonths} Months
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={1}
+                  max={12}
+                  step={1}
+                  value={durationMonths}
+                  onChange={(e) => setDurationMonths(Number(e.target.value))}
+                  className="mt-3 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-primary [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_12px_var(--violet)]"
+                />
+                <div className="mt-1 flex justify-between text-[10px] text-muted-foreground/60">
+                  <span>1 Month</span>
+                  <span>12 Months</span>
+                </div>
+              </div>
             </div>
 
-            {/* Right: Interactive Cost / Team Estimator */}
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1.1, delay: 0.3, ease }}
-              className="glass relative overflow-hidden rounded-[2rem] p-7 sm:p-8"
-            >
-              <div className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-primary/20 blur-[60px]" />
-              <h3 className="font-display text-lg font-semibold tracking-tight text-foreground">
-                Software Team Estimator
-              </h3>
-              <p className="mt-1.5 text-xs text-muted-foreground">
-                Calculate estimated investment for a dedicated CanbeTech engineering pod.
-              </p>
-
-              <div className="mt-7 space-y-6">
-                <div>
-                  <div className="flex items-baseline justify-between">
-                    <label className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                      Dedicated Engineers
-                    </label>
-                    <span className="font-display text-lg font-semibold text-foreground">
-                      {teamSize} Senior Devs
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={1}
-                    max={10}
-                    step={1}
-                    value={teamSize}
-                    onChange={(e) => setTeamSize(Number(e.target.value))}
-                    className="mt-3 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-primary [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_12px_var(--violet)]"
-                  />
-                  <div className="mt-1 flex justify-between text-[10px] text-muted-foreground/60">
-                    <span>1 Engineer</span>
-                    <span>10 Engineers</span>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-baseline justify-between">
-                    <label className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                      Project Duration
-                    </label>
-                    <span className="font-display text-lg font-semibold text-foreground">
-                      {durationMonths} Months
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={1}
-                    max={12}
-                    step={1}
-                    value={durationMonths}
-                    onChange={(e) => setDurationMonths(Number(e.target.value))}
-                    className="mt-3 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-primary [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:shadow-[0_0_12px_var(--violet)]"
-                  />
-                  <div className="mt-1 flex justify-between text-[10px] text-muted-foreground/60">
-                    <span>1 Month</span>
-                    <span>12 Months</span>
-                  </div>
-                </div>
+            <div className="mt-7 grid grid-cols-2 gap-3">
+              <div className="rounded-2xl bg-foreground/5 p-4">
+                <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Monthly Investment</p>
+                <p className="mt-1.5 font-display text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+                  ${monthlyCost.toLocaleString()}
+                </p>
               </div>
-
-              <div className="mt-7 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl bg-foreground/5 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Monthly Investment</p>
-                  <p className="mt-1.5 font-display text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
-                    ${monthlyCost.toLocaleString()}
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-primary/8 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Est. Total</p>
-                  <p className="mt-1.5 font-display text-xl font-semibold tracking-tight text-primary sm:text-2xl">
-                    ${totalCost.toLocaleString()}
-                  </p>
-                </div>
+              <div className="rounded-2xl bg-primary/8 p-4">
+                <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Est. Total</p>
+                <p className="mt-1.5 font-display text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+                  ${totalCost.toLocaleString()}
+                </p>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
-      </section>
+        </div>
+      </PageHero>
 
       {/* ─── CAPABILITIES SWITCHER ─── */}
-      <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-        <Reveal>
+      <section className="relative mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
+        <Reveal className="text-left">
           <SectionLabel>Full-Spectrum Engineering</SectionLabel>
-          <h2 className="mt-6 max-w-xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl">
-            Modern technologies,
-            <span className="font-serif italic text-primary"> flawless execution</span>
+          <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
+            Modern Technologies,{" "}
+            <span className="block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              Flawless Execution
+            </span>
           </h2>
         </Reveal>
 
@@ -329,36 +285,32 @@ export function ServicesPage() {
                   key={cap.title}
                   type="button"
                   onClick={() => setActiveService(i)}
-                  className={`group flex w-full items-center gap-4 rounded-2xl px-5 py-4 text-left transition-all duration-400 ${
-                    activeService === i
+                  className={`group flex w-full items-center gap-4 rounded-2xl px-5 py-4 text-left transition-all duration-400 ${activeService === i
                       ? "glass border-primary/40 bg-foreground/5"
                       : "border border-transparent hover:bg-foreground/3"
-                  }`}
+                    }`}
                 >
                   <span
-                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors duration-300 ${
-                      activeService === i
+                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors duration-300 ${activeService === i
                         ? "bg-primary/15 text-primary"
                         : "bg-foreground/5 text-muted-foreground group-hover:text-foreground"
-                    }`}
+                      }`}
                   >
                     <Icon className="h-5 w-5" />
                   </span>
                   <span>
                     <span
-                      className={`block text-sm font-medium tracking-tight transition-colors ${
-                        activeService === i ? "text-foreground" : "text-foreground/80"
-                      }`}
+                      className={`block text-sm font-medium tracking-tight transition-colors ${activeService === i ? "text-foreground" : "text-foreground/80"
+                        }`}
                     >
                       {cap.title}
                     </span>
                   </span>
                   <ChevronRight
-                    className={`ml-auto h-4 w-4 shrink-0 transition-all duration-300 ${
-                      activeService === i
+                    className={`ml-auto h-4 w-4 shrink-0 transition-all duration-300 ${activeService === i
                         ? "translate-x-0 text-primary opacity-100"
                         : "-translate-x-1 text-muted-foreground opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
-                    }`}
+                      }`}
                   />
                 </button>
               );
@@ -373,7 +325,7 @@ export function ServicesPage() {
             className="glass relative overflow-hidden rounded-[2rem] p-8 sm:p-10"
           >
             <div className={`pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-gradient-to-br ${capabilities[activeService].accent} blur-[60px]`} />
-            
+
             {(() => {
               const cap = capabilities[activeService];
               const Icon = cap.icon;
@@ -419,18 +371,21 @@ export function ServicesPage() {
       </section>
 
       {/* ─── TECH STACK GRID ─── */}
-      <section className="border-y border-border/60 py-20">
+      <section className="border-y border-border/60 py-24">
         <div className="mx-auto max-w-7xl px-5 md:px-10">
-          <Reveal className="text-center">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          <Reveal className="text-left">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
               Modern Tech Ecosystem
             </p>
-            <h2 className="mx-auto mt-5 max-w-lg font-display text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl">
-              Built with cutting-edge <span className="font-serif italic">stack</span>
+            <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl">
+              Built With Cutting-Edge{" "}
+              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+                Tech Stack
+              </span>
             </h2>
           </Reveal>
 
-          <div className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {techStack.map((t, i) => {
               const Icon = t.icon;
               return (
@@ -451,12 +406,14 @@ export function ServicesPage() {
       </section>
 
       {/* ─── ENGAGEMENT MODELS ─── */}
-      <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-        <Reveal>
+      <section className="relative mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
+        <Reveal className="text-left">
           <SectionLabel>Engagement Options</SectionLabel>
-          <h2 className="mt-6 max-w-lg font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl">
-            Flexible models,
-            <span className="font-serif italic text-primary"> predictable results</span>
+          <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
+            Flexible Models,{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              Predictable Results
+            </span>
           </h2>
         </Reveal>
 
@@ -466,11 +423,10 @@ export function ServicesPage() {
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.4, ease }}
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] p-7 transition-colors duration-500 ${
-                  tier.highlight
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] p-7 transition-colors duration-500 ${tier.highlight
                     ? "glass border-primary/40"
                     : "glass hover:border-primary/25"
-                }`}
+                  }`}
               >
                 {tier.highlight && (
                   <span className="absolute right-5 top-5 rounded-full bg-[var(--gradient-cta)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary-foreground">
@@ -495,11 +451,10 @@ export function ServicesPage() {
 
                 <Link
                   to="/contact"
-                  className={`mt-7 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-300 ${
-                    tier.highlight
+                  className={`mt-7 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-300 ${tier.highlight
                       ? "btn-cta text-primary-foreground"
                       : "border border-border text-foreground/80 hover:border-primary/40 hover:text-foreground"
-                  }`}
+                    }`}
                 >
                   Start a Project
                   <ArrowRight className="h-4 w-4" />
@@ -509,6 +464,9 @@ export function ServicesPage() {
           ))}
         </div>
       </section>
+
+      {/* ─── FREQUENTLY ASKED QUESTIONS ─── */}
+      <FAQ />
     </>
   );
 }

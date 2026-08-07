@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { Logo } from "./Logo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const brand = "CANBETECH".split("");
@@ -24,23 +25,15 @@ export function Preloader({ onDone }: { onDone: () => void }) {
           transition={{ duration: 0.9, ease }}
           className="fixed inset-0 z-[100] grid place-items-center bg-background"
         >
-          <div className="hero-glow pointer-events-none absolute inset-0 opacity-70" />
-          <motion.div
-            initial={{ opacity: 0.2, scale: 0.8 }}
-            animate={{ opacity: [0.2, 0.6, 0.3], scale: 1.2 }}
-            transition={{ duration: 2.3, ease }}
-            className="pointer-events-none absolute h-[320px] w-[320px] rounded-full bg-primary/25 blur-[120px]"
-          />
-
           <div className="relative flex flex-col items-center gap-6">
-            <motion.span
-              initial={{ scale: 0, rotate: -90 }}
+            {/* Animated Pinwheel Logo with rotation & smooth reveal — no glow */}
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 1, ease }}
-              className="grid h-9 w-9 place-items-center rounded-full bg-[var(--gradient-cta)] shadow-[0_0_30px_-6px_var(--violet)]"
+              transition={{ duration: 1.2, ease }}
             >
-              <span className="h-2 w-2 rounded-full bg-background" />
-            </motion.span>
+              <Logo size={56} animate className="opacity-90" />
+            </motion.div>
 
             <div className="flex items-baseline overflow-hidden font-display text-4xl font-medium tracking-[-0.04em] sm:text-6xl">
               {brand.map((c, i) => (
@@ -79,7 +72,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
               transition={{ duration: 0.8, delay: 0.9 }}
               className="text-[10px] uppercase tracking-[0.42em] text-muted-foreground"
             >
-              CANBETECH
+              Intelligent Software Solutions
             </motion.p>
           </div>
         </motion.div>

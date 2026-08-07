@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import planet from "@/assets/image.png";
 import { ArrowUpRight } from 'lucide-react';
 
@@ -8,10 +8,64 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const headline = ["Building Intelligent Software for Tomorrow"];
 
 const stats = [
-  { value: "$240M+", label: "Media managed" },
-  { value: "4.8x", label: "Avg. blended ROAS" },
-  { value: "120+", label: "Brands scaled" },
+  { value: 240, suffix: "M+", prefix: "$", label: "Media managed" },
+  { value: 4.8, suffix: "x", prefix: "", label: "Avg. blended ROAS", decimals: 1 },
+  { value: 120, suffix: "+", prefix: "", label: "Brands scaled" },
 ];
+
+/** Animated counter that counts up from 0 to `end` */
+function AnimatedStat({
+  end,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+  duration = 2000,
+}: {
+  end: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+  duration?: number;
+}) {
+  const [display, setDisplay] = useState("0");
+  const ref = useRef<HTMLSpanElement>(null);
+  const [hasRun, setHasRun] = useState(false);
+
+  useEffect(() => {
+    if (hasRun) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasRun(true);
+          const startTime = performance.now();
+          const animate = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = eased * end;
+            setDisplay(
+              decimals > 0 ? current.toFixed(decimals) : Math.round(current).toString()
+            );
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end, duration, decimals, hasRun]);
+
+  return (
+    <span ref={ref}>
+      {prefix}{display}{suffix}
+    </span>
+  );
+}
 
 export function Hero({ start = true }: { start?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -52,7 +106,7 @@ export function Hero({ start = true }: { start?: boolean }) {
 
       <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative z-10 max-w-3xl text-center">
         <motion.a
-          href="#work"
+          href="/work"
           variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}
           initial="hidden"
           animate={show}
@@ -76,7 +130,7 @@ export function Hero({ start = true }: { start?: boolean }) {
 
             <span className="h-3 w-px bg-white/15" />
 
-            <span>2026 Growth Benchmark Report</span>
+            <span>AI-Powered Software Development</span>
 
             <svg
               className="ml-0.5 h-3 w-3 -translate-x-0.5 opacity-60 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
@@ -90,8 +144,8 @@ export function Hero({ start = true }: { start?: boolean }) {
           </span>
         </motion.a>
 
-        <h1 className="mx-auto max-w-[16ch] text-balance font-display text-[2.35rem] font-semibold leading-[1.04] tracking-[-0.035em] text-foreground sm:text-[3.6rem] md:text-[4rem]">
-          <span className="sr-only">Turn Marketing Into Measurable ROI — Not Another Campaign</span>
+        <h1 className="mx-auto max-w-[17ch] text-balance font-display text-3xl font-semibold leading-[1.04] tracking-[-0.035em] text-foreground sm:text-5xl md:text-6xl lg:text-[4.5rem]">
+          <span className="sr-only">Building Intelligent Software for Tomorrow</span>
           <span aria-hidden className="flex flex-wrap items-baseline justify-center gap-x-[0.24em] gap-y-[0.05em]">
             {headline.map((word, i) => (
               <span key={word} className="inline-block overflow-hidden pb-[0.03em] align-baseline">
@@ -110,7 +164,6 @@ export function Hero({ start = true }: { start?: boolean }) {
               </span>
             ))}
           </span>
-
         </h1>
 
         <motion.p
@@ -118,9 +171,9 @@ export function Hero({ start = true }: { start?: boolean }) {
           initial="hidden"
           animate={show}
           transition={{ duration: 1, delay: 0.8, ease }}
-          className="mx-auto mt-5 max-w-[65ch] text-balance text-[16px] leading-[1.75] text-muted-foreground sm:text-[15.5px]"
+          className="mx-auto mt-2 max-w-[65ch] text-balance text-lg leading-[1.8] text-muted-foreground sm:text-xl"
         >
-          CanbeTech builds AI-powered software with scalable architecture to deliver fast, reliable, and high-quality digital solutions that drive business growth.
+          CanbeTech build mobile apps, web platforms and software systems faster using AI-accelerated development workflows
         </motion.p>
 
         <motion.div
@@ -128,13 +181,13 @@ export function Hero({ start = true }: { start?: boolean }) {
           initial="hidden"
           animate={show}
           transition={{ duration: 1, delay: 0.92, ease }}
-          className="mt-9 flex flex-wrap items-center justify-center gap-3"
+          className="mt-7 flex flex-wrap items-center justify-center gap-3"
         >
           <a
-            href="#contact"
-            className="btn-cta rounded-full px-12 py-2.5 text-base font-medium text-primary-foreground"
+            href="/contact"
+            className="btn-cta rounded-full px-12 py-2.5 text-base font-semibold text-primary-foreground"
           >
-            Get Started < ArrowUpRight  className="size-5 ml-2 inline" /> 
+            Get Started <ArrowUpRight className="size-5 ml-2 inline" />
           </a>
 
           <a
@@ -150,12 +203,18 @@ export function Hero({ start = true }: { start?: boolean }) {
           initial="hidden"
           animate={show}
           transition={{ duration: 1, delay: 1.05, ease }}
-          className="mx-auto mt-12 flex max-w-lg items-center justify-center divide-x divide-border"
+          className="mx-auto mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-0 sm:divide-x sm:divide-border max-w-xl"
         >
           {stats.map((s) => (
             <div key={s.label} className="px-5 sm:px-7">
               <dt className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                {s.value}
+                <AnimatedStat
+                  end={s.value}
+                  prefix={s.prefix}
+                  suffix={s.suffix}
+                  decimals={s.decimals ?? 0}
+                  duration={2200}
+                />
               </dt>
               <dd className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white">
                 {s.label}

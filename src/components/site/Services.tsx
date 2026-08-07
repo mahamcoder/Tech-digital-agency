@@ -2,8 +2,8 @@ import { Reveal, SectionLabel } from "./Reveal";
 
 const services = [
   {
-    title: "Brand & Positioning",
-    body: "Sharp narratives, identity systems and messaging architecture that make you the obvious choice.",
+    title: "Mobile App Development",
+    body: "React Native, Flutter, Swift, Kotlin — cross-platform and native iOS/Android apps",
     icon: (
       <>
         <circle cx="24" cy="24" r="14" />
@@ -13,8 +13,8 @@ const services = [
     ),
   },
   {
-    title: "Performance Media",
-    body: "Full-funnel paid programs across search, social and retail — engineered around contribution margin.",
+    title: "Web Development",
+    body: "React, Next.js, Node.js/Python/Go backends, REST/GraphQL, microservices",
     icon: (
       <>
         <path d="M6 34l10-12 8 7 12-17" />
@@ -24,8 +24,8 @@ const services = [
     ),
   },
   {
-    title: "Creative Studio",
-    body: "Cinematic film, motion and static built as testable systems, not one-off assets.",
+    title: "DevOps",
+    body: "CI/CD pipelines, Docker, Kubernetes, AWS/Azure/GCP, automated testing, environment provisioning",
     icon: (
       <>
         <rect x="6" y="12" width="24" height="24" rx="4" />
@@ -34,8 +34,8 @@ const services = [
     ),
   },
   {
-    title: "Lifecycle & CRM",
-    body: "Retention journeys, segmentation and automation that compound every acquired customer.",
+    title: "Quality Assurance",
+    body: "Manual testing, automated test suites, performance testing, security checks and QA strategy",
     icon: (
       <>
         <path d="M8 14h32v20H8z" />
@@ -44,8 +44,8 @@ const services = [
     ),
   },
   {
-    title: "Web Experience",
-    body: "Conversion-obsessed sites and landing systems with award-level craft in every frame.",
+    title: "Maintenance & Upgrades",
+    body: "Ongoing support, feature additions, performance optimization and security updates",
     icon: (
       <>
         <rect x="6" y="9" width="36" height="28" rx="4" />
@@ -54,8 +54,8 @@ const services = [
     ),
   },
   {
-    title: "Growth Analytics",
-    body: "Clean measurement, incrementality testing and dashboards your board actually trusts.",
+    title: "Project Management",
+    body: "Agile workflows, Scrum, Kanban, Jira/Asana, regular syncs, transparent progress tracking",
     icon: (
       <>
         <path d="M10 38V22M22 38V10M34 38V28" />
@@ -67,14 +67,16 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="relative mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36">
+    <section id="services" className="relative mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[300px] w-[700px] max-w-[120vw] -translate-x-1/2 rounded-full bg-primary/10 blur-[160px]" />
 
-      <Reveal className="max-w-2xl">
+      <Reveal className="max-w-3xl text-left">
         <SectionLabel>What we do</SectionLabel>
-        <h2 className="mt-6 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl">
-          A full growth engine,
-          <span className="block font-serif italic">built in one orbit</span>
+        <h2 className="mt-6 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
+          A Full Growth Engine,{" "}
+          <span className="block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            Built in One Orbit
+          </span>
         </h2>
       </Reveal>
 

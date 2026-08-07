@@ -1,9 +1,8 @@
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
 import { Reveal, SectionLabel } from "@/components/site/Reveal";
+import { PageHero } from "@/components/site/PageHero";
 import {
-  ArrowRight,
   MapPin,
   Clock,
   Users,
@@ -11,12 +10,15 @@ import {
   Sparkles,
   Globe,
   Star,
-  CheckCircle2,
   Cpu,
   Zap,
   ShieldCheck,
   Layers,
-  Code2,
+  Linkedin,
+  Github,
+  Twitter,
+  CheckCircle2,
+  Calendar,
 } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -35,6 +37,8 @@ const team = [
     specialization: "Cloud & AI Systems",
     bio: "10+ years engineering scalable software architectures, multi-tenant platforms, and AI-powered workflows.",
     initials: "AH",
+    color: "from-purple-500/30 to-violet-500/10",
+    social: { linkedin: "https://linkedin.com", github: "https://github.com", twitter: "https://twitter.com" },
   },
   {
     name: "Alex Chen",
@@ -42,6 +46,8 @@ const team = [
     specialization: "Full-Stack Architecture",
     bio: "Ex-Google tech lead, 12+ years building high-throughput microservices and distributed databases.",
     initials: "AC",
+    color: "from-blue-500/30 to-cyan-500/10",
+    social: { linkedin: "https://linkedin.com", github: "https://github.com", twitter: "https://twitter.com" },
   },
   {
     name: "Maya Okafor",
@@ -49,6 +55,8 @@ const team = [
     specialization: "iOS & Android",
     bio: "Built 30+ native and React Native apps with millions of active users and award-winning interfaces.",
     initials: "MO",
+    color: "from-emerald-500/30 to-teal-500/10",
+    social: { linkedin: "https://linkedin.com", github: "https://github.com", twitter: "https://twitter.com" },
   },
   {
     name: "Sarah Kim",
@@ -56,7 +64,16 @@ const team = [
     specialization: "CI/CD & Cloud Infrastructure",
     bio: "Specializes in Kubernetes, AWS multi-cloud automation, and automated zero-downtime deployments.",
     initials: "SK",
+    color: "from-amber-500/30 to-orange-500/10",
+    social: { linkedin: "https://linkedin.com", github: "https://github.com", twitter: "https://twitter.com" },
   },
+];
+
+const timelineMilestones = [
+  { year: "2020", title: "Agency Founded", desc: "Started as a high-precision software engineering shop specializing in full-stack cloud applications." },
+  { year: "2022", title: "AI & ML R&D Lab", desc: "Integrated dedicated artificial intelligence workflows, LLM automation, and predictive analytics into core client deliverables." },
+  { year: "2024", title: "Global Expansion", desc: "Established strategic regional hubs in London, New York, and Bahawalpur HQ to serve 200+ clients across 15 countries." },
+  { year: "2026", title: "500+ Projects Scale", desc: "Delivering autonomous AI software agents, enterprise SaaS, and modern mobile solutions with guaranteed SLAs." },
 ];
 
 const locations = [
@@ -145,115 +162,57 @@ export function AboutPage() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative isolate overflow-hidden pb-20 pt-32 sm:pt-40 md:pb-28">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute left-[8%] top-[15%] h-[400px] w-[500px] rounded-full bg-primary/10 blur-[160px]" />
-          <div className="absolute right-[15%] bottom-[5%] h-[300px] w-[380px] rounded-full bg-accent/8 blur-[140px]" />
-        </div>
-
-        <div className="mx-auto max-w-7xl px-5 md:px-10">
-          <div className="grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
-            <div>
+      <PageHero
+        badge="About CanbeTech"
+        aiVariant="about"
+        title={
+          <>
+            Building tomorrow's
+            <span className="mt-2 block bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
+              technology solutions today
+            </span>
+          </>
+        }
+        description="CanbeTech is a modern software company delivering professional digital solutions powered by AI, intelligent automation, and scalable cloud architectures — built to transform how businesses operate in the digital age."
+        primaryCta={{ label: "Start Your Project", to: "/contact" }}
+        secondaryCta={{ label: "Explore Services", to: "/services" }}
+      >
+        {/* Stat bar */}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {stats.map((s, i) => {
+            const Icon = s.icon;
+            return (
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease }}
-              >
-                <SectionLabel>About CanbeTech</SectionLabel>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.1, ease }}
-                className="mt-7 font-display text-[2.5rem] font-semibold leading-[1.06] tracking-[-0.035em] text-foreground sm:text-6xl lg:text-7xl"
-              >
-                Building tomorrow's
-                <span className="mt-2 block font-serif text-[0.88em] font-normal italic text-primary">
-                  technology solutions today
-                </span>
-              </motion.h1>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.25, ease }}
-                className="mt-8 space-y-5"
-              >
-                <p className="max-w-[56ch] text-[15px] leading-[1.8] text-muted-foreground">
-                  CanbeTech is a modern software company delivering professional digital solutions powered by AI,
-                  intelligent automation, and scalable cloud architectures — built to transform how businesses operate
-                  in the digital age.
-                </p>
-                <p className="max-w-[56ch] text-[15px] leading-[1.8] text-muted-foreground">
-                  We combine deep technical expertise with a relentless focus on quality, scalability, and measurable
-                  outcomes for over 200+ companies across 14+ countries.
-                </p>
-              </motion.div>
-
-              <motion.div
+                key={s.label}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease }}
-                className="mt-9 flex flex-wrap gap-3"
+                transition={{ duration: 0.6, delay: 0.55 + i * 0.08, ease }}
+                whileHover={{ y: -4 }}
+                className="glass group relative overflow-hidden rounded-2xl p-5 text-center transition-colors duration-500 hover:border-primary/30"
               >
-                <Link
-                  to="/contact"
-                  className="btn-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-primary-foreground"
-                >
-                  Start Your Project
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-                >
-                  Explore Services
-                </Link>
+                <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+                <Icon className="mx-auto h-5 w-5 text-primary/60" />
+                <p className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                  {s.value}
+                </p>
+                <p className="mt-1.5 text-xs text-muted-foreground">{s.label}</p>
               </motion.div>
-            </div>
-
-            {/* Right: Live stat matrix */}
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1.1, delay: 0.3, ease }}
-              className="grid grid-cols-2 gap-3"
-            >
-              {stats.map((s, i) => {
-                const Icon = s.icon;
-                return (
-                  <motion.div
-                    key={s.label}
-                    whileHover={{ y: -4 }}
-                    transition={{ duration: 0.35, ease }}
-                    className="glass group relative overflow-hidden rounded-2xl p-6 transition-colors duration-500 hover:border-primary/30"
-                  >
-                    <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-                    <Icon className="h-5 w-5 text-primary/60" />
-                    <p className="mt-4 font-display text-3xl font-semibold tracking-tight text-foreground">
-                      {s.value}
-                    </p>
-                    <p className="mt-1.5 text-xs text-muted-foreground">{s.label}</p>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
+            );
+          })}
         </div>
-      </section>
+      </PageHero>
 
       {/* ─── VISION & MISSION ─── */}
-      <section className="border-y border-border/60 py-20">
+      <section className="border-y border-border/60 py-24">
         <div className="mx-auto max-w-7xl px-5 md:px-10">
           <div className="grid gap-8 lg:grid-cols-2">
             <Reveal>
               <div className="glass rounded-[2rem] p-8 sm:p-10">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-primary/70">Our Vision</p>
-                <h3 className="mt-3 font-display text-2xl font-semibold text-foreground">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-primary">Our Vision</p>
+                <h3 className="mt-3 font-display text-2xl font-semibold text-foreground sm:text-3xl">
                   Empowering global organizations with AI & Cloud
                 </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
                   To be the world's most trusted technology partner — empowering organizations of every size to harness
                   the full potential of AI, intelligent automation, and cloud-native architectures to build a smarter, more connected future.
                 </p>
@@ -262,11 +221,11 @@ export function AboutPage() {
 
             <Reveal delay={0.1}>
               <div className="glass rounded-[2rem] p-8 sm:p-10">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-primary/70">Our Mission</p>
-                <h3 className="mt-3 font-display text-2xl font-semibold text-foreground">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-primary">Our Mission</p>
+                <h3 className="mt-3 font-display text-2xl font-semibold text-foreground sm:text-3xl">
                   Precision-engineered digital solutions
                 </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
                   To deliver precision-engineered digital solutions that solve complex business challenges — combining deep technical
                   expertise with a relentless focus on quality, scalability, and measurable outcomes for every client we serve.
                 </p>
@@ -276,13 +235,115 @@ export function AboutPage() {
         </div>
       </section>
 
+      {/* ─── TEAM SECTION ─── */}
+      <section className="relative mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
+        <Reveal className="text-left">
+          <SectionLabel>Leadership & Engineering</SectionLabel>
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
+            Meet the Minds Behind{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              CanbeTech
+            </span>
+          </h2>
+          <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
+            Our team brings together senior architects, AI researchers, UI designers, and DevOps engineers with decades of combined experience.
+          </p>
+        </Reveal>
+
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {team.map((m, i) => (
+            <Reveal key={m.name} delay={i * 0.08}>
+              <motion.div
+                whileHover={{ y: -7 }}
+                transition={{ duration: 0.35, ease }}
+                className="glass group relative flex h-full flex-col overflow-hidden rounded-[2rem] transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/15"
+              >
+                {/* Gradient Top Strip */}
+                <div className={`h-28 w-full bg-gradient-to-br ${m.color} relative overflow-hidden`}>
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.1),transparent_60%)]" />
+                  {/* Floating Specialization Badge */}
+                  <span className="absolute right-4 top-4 rounded-full border border-white/20 bg-background/60 px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-foreground font-medium backdrop-blur-md">
+                    {m.specialization}
+                  </span>
+                </div>
+
+                {/* Avatar overlapping the strip */}
+                <div className="relative -mt-10 px-6">
+                  <div className={`grid h-20 w-20 place-items-center rounded-2xl bg-gradient-to-br ${m.color} font-display text-2xl font-bold tracking-wider text-foreground ring-4 ring-background shadow-lg transition-transform duration-300 group-hover:scale-105`}>
+                    {m.initials}
+                  </div>
+                </div>
+
+                <div className="flex flex-1 flex-col justify-between px-6 pb-6 pt-4">
+                  <div>
+                    <h3 className="text-xl font-semibold tracking-tight text-foreground">{m.name}</h3>
+                    <p className="mt-0.5 text-sm font-medium bg-gradient-to-r from-primary to-violet-400 bg-clip-text text-transparent">{m.role}</p>
+                    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{m.bio}</p>
+                  </div>
+
+                  {/* Social Links */}
+                  <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
+                    <a href={m.social.linkedin} target="_blank" rel="noopener noreferrer" className="grid h-8 w-8 place-items-center rounded-lg bg-white/5 text-muted-foreground transition-all hover:bg-primary/15 hover:text-primary">
+                      <Linkedin className="h-3.5 w-3.5" />
+                    </a>
+                    <a href={m.social.github} target="_blank" rel="noopener noreferrer" className="grid h-8 w-8 place-items-center rounded-lg bg-white/5 text-muted-foreground transition-all hover:bg-primary/15 hover:text-primary">
+                      <Github className="h-3.5 w-3.5" />
+                    </a>
+                    <a href={m.social.twitter} target="_blank" rel="noopener noreferrer" className="grid h-8 w-8 place-items-center rounded-lg bg-white/5 text-muted-foreground transition-all hover:bg-primary/15 hover:text-primary">
+                      <Twitter className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── GROWTH TIMELINE ─── */}
+      <section className="border-y border-border/60 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl px-5 md:px-10">
+          <Reveal className="text-left">
+            <SectionLabel>Our Journey</SectionLabel>
+            <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
+              Timeline of{" "}
+              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+                Innovation
+              </span>
+            </h2>
+          </Reveal>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {timelineMilestones.map((ms, i) => (
+              <Reveal key={ms.year} delay={i * 0.08}>
+                <div className="glass relative flex h-full flex-col justify-between rounded-3xl p-7 transition-all hover:border-primary/30">
+                  <div>
+                    <span className="inline-block rounded-xl bg-primary/12 px-3.5 py-1.5 font-display text-lg font-bold text-primary">
+                      {ms.year}
+                    </span>
+                    <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-foreground">
+                      {ms.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                      {ms.desc}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── WHY CHOOSE US ─── */}
-      <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-        <Reveal>
+      <section className="relative mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
+        <Reveal className="text-left">
           <SectionLabel>Why Choose CanbeTech</SectionLabel>
-          <h2 className="mt-6 max-w-lg font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl">
-            We don't just write code —
-            <span className="font-serif italic text-primary"> we engineer solutions</span>
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
+            We Don't Just Write Code —{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              We Engineer Solutions
+            </span>
           </h2>
         </Reveal>
 
@@ -298,7 +359,7 @@ export function AboutPage() {
                   <h3 className="mt-5 font-display text-xl font-semibold tracking-tight text-foreground">
                     {f.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.body}</p>
                 </div>
               </Reveal>
             );
@@ -307,13 +368,15 @@ export function AboutPage() {
       </section>
 
       {/* ─── GLOBAL LOCATIONS ─── */}
-      <section className="border-t border-border/60 py-20">
+      <section className="border-t border-border/60 py-24">
         <div className="mx-auto max-w-7xl px-5 md:px-10">
-          <Reveal>
+          <Reveal className="text-left">
             <SectionLabel>Global Operations</SectionLabel>
-            <h2 className="mt-6 max-w-lg font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl">
-              Four hubs,
-              <span className="font-serif italic text-primary"> global reach</span>
+            <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
+              Four Hubs,{" "}
+              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+                Global Reach
+              </span>
             </h2>
           </Reveal>
 
@@ -324,18 +387,16 @@ export function AboutPage() {
                   key={loc.city}
                   type="button"
                   onClick={() => setActiveLocation(i)}
-                  className={`group flex w-full items-center gap-4 rounded-2xl px-5 py-4 text-left transition-all duration-400 ${
-                    activeLocation === i
-                      ? "glass border-primary/30 bg-foreground/5"
-                      : "border border-transparent hover:bg-foreground/3"
-                  }`}
+                  className={`group flex w-full items-center gap-4 rounded-2xl px-5 py-4 text-left transition-all duration-400 ${activeLocation === i
+                    ? "glass border-primary/30 bg-foreground/5"
+                    : "border border-transparent hover:bg-foreground/3"
+                    }`}
                 >
                   <span
-                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors ${
-                      activeLocation === i
-                        ? "bg-primary/15 text-primary"
-                        : "bg-foreground/5 text-muted-foreground"
-                    }`}
+                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl transition-colors ${activeLocation === i
+                      ? "bg-primary/15 text-primary"
+                      : "bg-foreground/5 text-muted-foreground"
+                      }`}
                   >
                     {loc.city === "Remote" ? (
                       <Globe className="h-5 w-5" />

@@ -1,7 +1,8 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef, useState } from "react";
+import { motion } from "motion/react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Reveal, SectionLabel } from "@/components/site/Reveal";
+import { PageHero } from "@/components/site/PageHero";
 import {
   ArrowRight,
   Search,
@@ -12,10 +13,7 @@ import {
   Clock,
   Users,
   BarChart3,
-  Zap,
   Target,
-  TrendingUp,
-  Layers,
 } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -36,6 +34,7 @@ const phases = [
       "Channel economics modeling",
     ],
     outcome: "A clear map of where money is wasted and where opportunity lives.",
+    gradient: "from-violet-500/20 via-primary/10 to-transparent",
   },
   {
     n: "02",
@@ -52,6 +51,7 @@ const phases = [
       "KPI framework & targets",
     ],
     outcome: "A documented system your team can execute against with confidence.",
+    gradient: "from-blue-500/20 via-primary/10 to-transparent",
   },
   {
     n: "03",
@@ -68,6 +68,7 @@ const phases = [
       "Real-time performance dashboard",
     ],
     outcome: "Rapid velocity with measurable improvements every single week.",
+    gradient: "from-cyan-500/20 via-primary/10 to-transparent",
   },
   {
     n: "04",
@@ -84,6 +85,7 @@ const phases = [
       "Continuous creative optimization",
     ],
     outcome: "A self-improving system that gets better with every dollar spent.",
+    gradient: "from-emerald-500/20 via-primary/10 to-transparent",
   },
 ];
 
@@ -123,266 +125,194 @@ const principles = [
 ];
 
 export function ProcessPage() {
-  const [activePhase, setActivePhase] = useState(0);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const lineScale = useTransform(scrollYProgress, [0.1, 0.6], [0, 1]);
+  const [expandedPhase, setExpandedPhase] = useState<number | null>(null);
 
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative isolate overflow-hidden pb-16 pt-32 sm:pt-40 md:pb-24">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute left-[10%] top-[20%] h-[380px] w-[480px] rounded-full bg-primary/10 blur-[150px]" />
-          <div className="absolute right-[20%] top-[10%] h-[300px] w-[420px] rounded-full bg-accent/8 blur-[140px]" />
-        </div>
-        <div
-          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, oklch(1 0 0 / 0.16) 1px, transparent 1px), linear-gradient(to bottom, oklch(1 0 0 / 0.16) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-            maskImage: "radial-gradient(55% 50% at 50% 45%, black, transparent 80%)",
-            WebkitMaskImage: "radial-gradient(55% 50% at 50% 45%, black, transparent 80%)",
-          }}
-        />
+      <PageHero
+        badge="How We Work"
+        aiVariant="process"
+        title={
+          <>
+            A Disciplined Orbit{" "}
+            <span className="mt-2 block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              Around Your Revenue
+            </span>
+          </>
+        }
+        description="No retainer theatre. A small senior team, a shared dashboard, and a cadence that turns marketing into a predictable operating system."
+        primaryCta={{ label: "Start your 90-day sprint", to: "/contact" }}
+        secondaryCta={{ label: "See results first", to: "/work" }}
+      />
 
-        <div className="mx-auto max-w-7xl px-5 md:px-10">
-          <div className="grid items-end gap-10 lg:grid-cols-[1.3fr_0.7fr]">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease }}
-              >
-                <SectionLabel>How We Work</SectionLabel>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.1, ease }}
-                className="mt-7 font-display text-[2.5rem] font-semibold leading-[1.06] tracking-[-0.035em] text-foreground sm:text-6xl lg:text-7xl"
-              >
-                A disciplined orbit
-                <span className="mt-2 block font-serif text-[0.88em] font-normal italic text-primary">
-                  around your revenue
-                </span>
-              </motion.h1>
-            </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.25, ease }}
-              className="max-w-md text-[15px] leading-[1.8] text-muted-foreground lg:text-right"
-            >
-              No retainer theatre. A small senior team, a shared dashboard, and a
-              cadence that turns marketing into a predictable operating system.
-            </motion.p>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── 4-PHASE OPERATING SYSTEM ─── */}
-      <section ref={sectionRef} className="relative mx-auto max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
-        <Reveal>
+      {/* ─── 4-PHASE OPERATING SYSTEM (2×2 Card Grid) ─── */}
+      <section className="relative mx-auto max-w-7xl px-5 pb-14 md:px-10 md:pb-20">
+        <Reveal className="text-left">
           <SectionLabel>The Operating System</SectionLabel>
-          <h2 className="mt-6 max-w-lg font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl">
-            Four phases,
-            <span className="font-serif italic text-primary"> zero waste</span>
+          <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
+            Four Phases,{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              Zero Waste
+            </span>
           </h2>
         </Reveal>
 
-        {/* Phase switcher + detail */}
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-          {/* Phase selector */}
-          <div className="relative">
-            {/* Vertical connecting line */}
-            <div className="absolute left-[27px] top-0 hidden h-full w-px bg-border/60 lg:block">
-              <motion.div
-                style={{ scaleY: lineScale }}
-                className="h-full w-px origin-top bg-primary/50"
-              />
-            </div>
+        <div className="mt-14 grid gap-5 sm:grid-cols-2">
+          {phases.map((phase, i) => {
+            const Icon = phase.icon;
+            const isExpanded = expandedPhase === i;
 
-            <div className="space-y-3">
-              {phases.map((phase, i) => {
-                const Icon = phase.icon;
-                return (
-                  <button
-                    key={phase.n}
-                    type="button"
-                    onClick={() => setActivePhase(i)}
-                    className={`group relative flex w-full items-start gap-5 rounded-2xl px-4 py-5 text-left transition-all duration-400 lg:pl-14 ${
-                      activePhase === i
-                        ? "glass border-primary/30"
-                        : "border border-transparent hover:bg-foreground/3"
-                    }`}
-                  >
-                    {/* Node */}
-                    <span
-                      className={`relative z-10 hidden h-[54px] w-[54px] shrink-0 lg:grid lg:place-items-center lg:rounded-full lg:border lg:absolute lg:left-0 lg:top-5 lg:translate-x-0 ${
-                        activePhase === i
-                          ? "border-primary/40 bg-background"
-                          : "border-border bg-background"
-                      }`}
-                    >
-                      <span
-                        className={`grid h-9 w-9 place-items-center rounded-full font-display text-[11px] font-bold tracking-wide transition-colors ${
-                          activePhase === i
-                            ? "bg-[var(--gradient-cta)] text-primary-foreground"
-                            : "bg-foreground/5 text-muted-foreground"
-                        }`}
-                      >
-                        {phase.n}
-                      </span>
-                    </span>
+            return (
+              <Reveal key={phase.n} delay={i * 0.08}>
+                <motion.div
+                  layout
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.4, ease }}
+                  className="glass group relative overflow-hidden rounded-[2rem] p-7 sm:p-8 transition-colors duration-500 hover:border-primary/30 cursor-pointer"
+                  onClick={() => setExpandedPhase(isExpanded ? null : i)}
+                >
+                  {/* Gradient glow */}
+                  <div className={`pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br ${phase.gradient} blur-[50px] opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
 
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-foreground/5 text-muted-foreground transition-colors lg:hidden">
-                      <Icon className="h-5 w-5" />
-                    </span>
-
-                    <div className="min-w-0 flex-1">
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-primary/60">
-                        {phase.meta}
-                      </span>
-                      <span
-                        className={`mt-0.5 block font-display text-lg font-semibold tracking-tight transition-colors ${
-                          activePhase === i ? "text-foreground" : "text-foreground/70"
-                        }`}
-                      >
-                        {phase.title}
-                      </span>
-                      <span className="mt-0.5 block text-xs text-muted-foreground">
-                        {phase.subtitle}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Active phase detail */}
-          <motion.div
-            key={activePhase}
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease }}
-            className="glass relative overflow-hidden rounded-[2rem] p-8 sm:p-10"
-          >
-            <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary/15 blur-[60px]" />
-            
-            {(() => {
-              const phase = phases[activePhase];
-              const Icon = phase.icon;
-              return (
-                <>
-                  <div className="flex items-center gap-4">
-                    <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/12 text-primary">
+                  {/* Header */}
+                  <div className="flex items-start gap-4">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-primary/8 text-primary transition-colors duration-300 group-hover:bg-primary/15">
                       <Icon className="h-7 w-7" />
                     </span>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary/60">{phase.meta}</p>
-                      <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-3">
+                        <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                          {phase.n}
+                        </span>
+                        <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/70">
+                          {phase.meta}
+                        </span>
+                      </div>
+                      <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground">
                         {phase.title}
                       </h3>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{phase.subtitle}</p>
                     </div>
                   </div>
 
-                  <p className="mt-5 text-[15px] leading-[1.8] text-muted-foreground">
+                  {/* Body */}
+                  <p className="mt-5 text-[15px] leading-[1.75] text-muted-foreground">
                     {phase.body}
                   </p>
 
-                  <div className="mt-7">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                      Deliverables
-                    </p>
-                    <ul className="mt-4 space-y-2.5">
-                      {phase.deliverables.map((d, di) => (
-                        <motion.li
-                          key={d}
-                          initial={{ opacity: 0, x: 12 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.35, delay: di * 0.05, ease }}
-                          className="flex items-center gap-3 text-sm text-foreground/80"
-                        >
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-primary/70" />
-                          {d}
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
+                  {/* Expandable deliverables */}
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: isExpanded ? "auto" : 0,
+                      opacity: isExpanded ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.4, ease }}
+                    className="overflow-hidden"
+                  >
+                    <div className="mt-6 border-t border-border/60 pt-5">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                        Deliverables
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {phase.deliverables.map((d) => (
+                          <li key={d} className="flex items-center gap-2.5 text-sm text-foreground/80">
+                            <CheckCircle2 className="h-4 w-4 shrink-0 text-primary/70" />
+                            {d}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-5 rounded-xl bg-primary/6 p-4">
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-primary/70">Expected Outcome</p>
+                        <p className="mt-2 text-sm leading-relaxed text-foreground/80">{phase.outcome}</p>
+                      </div>
+                    </div>
+                  </motion.div>
 
-                  <div className="mt-7 rounded-xl bg-primary/6 p-4">
-                    <p className="text-[10px] uppercase tracking-[0.18em] text-primary/70">Expected Outcome</p>
-                    <p className="mt-2 text-sm leading-relaxed text-foreground/80">{phase.outcome}</p>
-                  </div>
-                </>
-              );
-            })()}
-          </motion.div>
+                  {/* Toggle hint */}
+                  <p className="mt-4 text-[11px] text-muted-foreground/50 transition-colors group-hover:text-muted-foreground">
+                    {isExpanded ? "Click to collapse ↑" : "Click to see deliverables →"}
+                  </p>
+                </motion.div>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
-      {/* ─── SPRINT ROADMAP ─── */}
-      <section className="border-y border-border/60 py-20">
+      {/* ─── HORIZONTAL TIMELINE ─── */}
+      <section className="border-y border-border/60 py-24">
         <div className="mx-auto max-w-7xl px-5 md:px-10">
-          <Reveal className="text-center">
+          <Reveal className="text-left">
             <SectionLabel>90-Day Roadmap</SectionLabel>
-            <h2 className="mx-auto mt-6 max-w-lg font-display text-3xl font-semibold tracking-[-0.03em] text-foreground sm:text-4xl">
-              Your first 90 days <span className="font-serif italic text-primary">mapped out</span>
+            <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
+              Your First 90 Days{" "}
+              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+                Mapped Out
+              </span>
             </h2>
           </Reveal>
 
-          <div className="mx-auto mt-14 max-w-3xl">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-4 top-0 h-full w-px bg-border/60 sm:left-6" />
-
-              <div className="space-y-1">
-                {milestones.map((m, i) => (
+          {/* Horizontal stepper */}
+          <div className="relative mt-16 overflow-x-auto no-scrollbar pb-4">
+            <div className="flex min-w-max items-start gap-0">
+              {milestones.map((m, i) => {
+                const isLast = i === milestones.length - 1;
+                return (
                   <Reveal key={m.week} delay={i * 0.04}>
-                    <div className="relative flex items-start gap-5 py-3 pl-10 sm:pl-14">
-                      {/* Node */}
-                      <span
-                        className={`absolute left-2 top-4 h-5 w-5 rounded-full border-2 sm:left-4 ${
-                          m.done
-                            ? "border-primary bg-primary/20"
-                            : "border-border bg-background"
-                        }`}
-                      >
-                        {m.done && (
-                          <span className="absolute inset-1 rounded-full bg-primary" />
-                        )}
-                      </span>
-                      <div className="flex flex-1 items-baseline justify-between gap-3">
-                        <span className={`text-sm ${m.done ? "text-foreground" : "text-muted-foreground"}`}>
+                    <div className="flex items-start">
+                      <div className="flex flex-col items-center" style={{ width: 120 }}>
+                        {/* Node */}
+                        <div
+                          className={`relative z-10 grid h-10 w-10 place-items-center rounded-full border-2 transition-colors ${
+                            m.done
+                              ? "border-primary bg-primary/15"
+                              : "border-border bg-background"
+                          }`}
+                        >
+                          {m.done ? (
+                            <CheckCircle2 className="h-5 w-5 text-primary" />
+                          ) : (
+                            <span className="h-2.5 w-2.5 rounded-full bg-border" />
+                          )}
+                        </div>
+
+                        {/* Label */}
+                        <p className={`mt-3 text-center text-[12px] font-medium leading-tight ${m.done ? "text-foreground" : "text-muted-foreground"}`}>
                           {m.label}
-                        </span>
-                        <span className="shrink-0 text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
+                        </p>
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground/60">
                           {m.week}
-                        </span>
+                        </p>
                       </div>
+
+                      {/* Connector line */}
+                      {!isLast && (
+                        <div className="mt-[18px] h-0.5 w-8 shrink-0 -mx-2">
+                          <div className={`h-full rounded-full ${m.done ? "bg-primary/40" : "bg-border/60"}`} />
+                        </div>
+                      )}
                     </div>
                   </Reveal>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── OPERATING PRINCIPLES ─── */}
-      <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
+      <section className="relative mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36">
         <div className="pointer-events-none absolute right-[10%] top-1/3 -z-10 h-[350px] w-[450px] rounded-full bg-primary/8 blur-[160px]" />
 
-        <Reveal>
+        <Reveal className="text-left">
           <SectionLabel>Principles</SectionLabel>
-          <h2 className="mt-6 max-w-lg font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl">
-            How we think about
-            <span className="font-serif italic text-primary"> growth</span>
+          <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
+            How We Think About{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              Growth
+            </span>
           </h2>
         </Reveal>
 
@@ -403,7 +333,7 @@ export function ProcessPage() {
                   <h3 className="mt-5 font-display text-xl font-semibold tracking-tight text-foreground">
                     {p.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
                     {p.body}
                   </p>
                 </motion.div>
@@ -414,7 +344,7 @@ export function ProcessPage() {
 
         {/* CTA */}
         <Reveal>
-          <div className="mt-16 flex flex-wrap items-center gap-4">
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/contact"
               className="btn-cta inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-primary-foreground"

@@ -1,14 +1,15 @@
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
+import { Logo } from "./Logo";
 
 const links = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/work" },
+  { label: "Industries", href: "/industries" },
   { label: "How we work", href: "/process" },
-  
 ];
 
 export function Nav() {
@@ -29,17 +30,17 @@ export function Nav() {
       className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-5"
     >
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-3 py-2.5 transition-all duration-500 sm:px-4 ${
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-full px-3 py-2.5 transition-all duration-500 sm:px-4 ${
           scrolled
             ? "glass shadow-[var(--shadow-elegant)]"
             : "border border-transparent bg-transparent"
         }`}
       >
-        <Link to="/" className="flex min-w-0 items-center gap-2 pl-2 text-lg font-semibold tracking-tight">
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-[var(--gradient-cta)] shadow-[0_0_18px_-4px_var(--violet)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-background" />
+        <Link to="/" className="flex min-w-0 items-center gap-2.1 pl-2 text-xl font-semibold tracking-tight">
+          <Logo size={26} />
+          <span>
+            CanbeTech<span className="text-primary">.</span>
           </span>
-          CanbeTech<span className="text-primary">.</span>
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
@@ -47,9 +48,9 @@ export function Nav() {
             <li key={l.label}>
               <Link
                 to={l.href}
-                className={`rounded-full px-3.5 py-2 text-[13px] transition-all duration-300 hover:bg-foreground/5 hover:text-foreground ${
+                className={`rounded-full px-4 py-2 text-sm transition-all duration-300 hover:bg-foreground/5 hover:text-foreground ${
                   isActive(l.href)
-                    ? "bg-foreground/8 text-foreground font-medium"
+                    ? "bg-foreground/8 font-medium text-foreground"
                     : "text-muted-foreground"
                 }`}
               >
@@ -59,18 +60,18 @@ export function Nav() {
           ))}
         </ul>
 
-        <div className="flex shrink-0 items-center gap-2">
-          <Link
-            to="/contact"
-            className="hidden rounded-full border border-border px-4 py-2 text-[13px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground sm:block"
+        <div className="flex shrink-0 items-center gap-2.5">
+          <a
+            href="mailto:info@canbetech.com?subject=Book%20a%20Call%20-%20CanbeTech"
+            className="hidden rounded-full border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground sm:block"
           >
             Book a call
-          </Link>
+          </a>
           <Link
             to="/contact"
-            className="btn-cta rounded-full px-4 py-2 text-[13px] font-medium text-primary-foreground"
+            className="btn-cta rounded-full px-4 py-2 text-sm font-medium text-primary-foreground"
           >
-            Try for free
+            Start your Project
           </Link>
           <button
             type="button"
@@ -111,7 +112,9 @@ export function Nav() {
                     to={l.href}
                     onClick={() => setOpen(false)}
                     className={`block rounded-2xl px-4 py-2.5 text-sm transition-colors hover:bg-foreground/5 hover:text-foreground ${
-                      isActive(l.href) ? "text-foreground bg-foreground/5 font-medium" : "text-foreground/80"
+                      isActive(l.href)
+                        ? "bg-foreground/5 font-medium text-foreground"
+                        : "text-foreground/80"
                     }`}
                   >
                     {l.label}
@@ -119,12 +122,21 @@ export function Nav() {
                 </li>
               ))}
               <li>
+                <a
+                  href="mailto:info@canbetech.com?subject=Book%20a%20Call%20-%20CanbeTech"
+                  onClick={() => setOpen(false)}
+                  className="block rounded-2xl px-4 py-2.5 text-sm text-primary font-medium transition-colors hover:bg-foreground/5"
+                >
+                  Book a call (info@canbetech.com)
+                </a>
+              </li>
+              <li>
                 <Link
                   to="/contact"
                   onClick={() => setOpen(false)}
                   className="block rounded-2xl px-4 py-2.5 text-sm text-foreground/80 transition-colors hover:bg-foreground/5 hover:text-foreground"
                 >
-                  Contact
+                  Contact Us
                 </Link>
               </li>
             </ul>

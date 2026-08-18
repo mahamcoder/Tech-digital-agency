@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Canbetech — Premium AI-Driven Digital Marketing Agency" },
+      { title: "CanbeTech — AI Software Development & Digital Agency" },
       {
         name: "description",
         content:
-          "Canbetech is a premium AI-driven digital marketing agency building brand, performance and growth systems for ambitious companies.",
+          "CanbeTech builds custom AI software solutions, web platforms, mobile apps, and enterprise cloud infrastructure for ambitious modern businesses.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -93,6 +93,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/logo-icon.png" },
     ],
   }),
 

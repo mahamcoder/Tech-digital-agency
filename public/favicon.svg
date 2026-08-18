@@ -1,10 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#a855f7"/>
-      <stop offset="100%" style="stop-color:#7c3aed"/>
+    <linearGradient id="grad-top" x1="100%" y1="0%" x2="0%" y2="50%">
+      <stop offset="0%" stop-color="#00C0FA" />
+      <stop offset="50%" stop-color="#0088FF" />
+      <stop offset="100%" stop-color="#3B66F5" />
+    </linearGradient>
+    <linearGradient id="grad-fold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338CA" />
+      <stop offset="50%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+    <linearGradient id="grad-bot" x1="0%" y1="50%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5" />
+      <stop offset="40%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#38BDF8" />
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="14" fill="#09090b"/>
-  <text x="32" y="44" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="38" fill="url(#g)">C</text>
+  <rect width="100" height="100" rx="22" fill="#09090b" />
+  <g transform="translate(16, 16) scale(0.68)">
+    <polygon points="90,14 42,14 14,42 30,58 55,33 90,33" fill="url(#grad-top)" />
+    <polygon points="14,42 14,58 42,86 58,70 36,48 30,58" fill="url(#grad-fold)" />
+    <polygon points="42,86 90,86 90,67 55,67 30,42 14,58" fill="url(#grad-bot)" />
+  </g>
 </svg>

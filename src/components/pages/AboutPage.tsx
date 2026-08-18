@@ -307,7 +307,7 @@ export function AboutPage() {
             <SectionLabel>Our Journey</SectionLabel>
             <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
               Timeline of{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
                 Innovation
               </span>
             </h2>
@@ -341,7 +341,7 @@ export function AboutPage() {
           <SectionLabel>Why Choose CanbeTech</SectionLabel>
           <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
             We Don't Just Write Code —{" "}
-            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               We Engineer Solutions
             </span>
           </h2>
@@ -374,7 +374,7 @@ export function AboutPage() {
             <SectionLabel>Global Operations</SectionLabel>
             <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
               Four Hubs,{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
                 Global Reach
               </span>
             </h2>

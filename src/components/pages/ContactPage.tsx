@@ -169,7 +169,7 @@ export function ContactPage() {
       {/* ─── MAIN FORM SECTION ─── */}
       <section className="mx-auto max-w-7xl px-5 pb-20 md:px-10 md:pb-28">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-10 items-start">
-          
+
           {/* ── LEFT: Clean Step-by-Step Form ── */}
           <Reveal>
             <div className="glass relative overflow-hidden rounded-[2rem] p-7 sm:p-9 border border-border/60 shadow-2xl">
@@ -231,22 +231,20 @@ export function ContactPage() {
                             onClick={() => {
                               if (isCompleted) setStep(i);
                             }}
-                            className={`flex items-center gap-2 text-xs font-semibold transition-colors ${
-                              isCurrent
+                            className={`flex items-center gap-2 text-xs font-semibold transition-colors ${isCurrent
                                 ? "text-primary font-bold"
                                 : isCompleted
-                                ? "text-foreground cursor-pointer"
-                                : "text-muted-foreground/60 cursor-default"
-                            }`}
+                                  ? "text-foreground cursor-pointer"
+                                  : "text-muted-foreground/60 cursor-default"
+                              }`}
                           >
                             <span
-                              className={`grid h-6 w-6 place-items-center rounded-full text-[11px] font-bold ${
-                                isCurrent
+                              className={`grid h-6 w-6 place-items-center rounded-full text-[11px] font-bold ${isCurrent
                                   ? "bg-primary text-primary-foreground"
                                   : isCompleted
-                                  ? "bg-primary/20 text-primary border border-primary/40"
-                                  : "bg-foreground/5 text-muted-foreground"
-                              }`}
+                                    ? "bg-primary/20 text-primary border border-primary/40"
+                                    : "bg-foreground/5 text-muted-foreground"
+                                }`}
                             >
                               {isCompleted ? "✓" : st.id}
                             </span>
@@ -287,18 +285,16 @@ export function ContactPage() {
                                 key={s.id}
                                 type="button"
                                 onClick={() => toggleService(s.label)}
-                                className={`flex items-start gap-3.5 rounded-2xl p-4 text-left transition-all duration-300 ${
-                                  active
-                                    ? "bg-primary/20 text-foreground border border-primary/60 shadow-[0_0_20px_-4px_rgba(168,85,247,0.35)]"
+                                className={`flex items-start gap-3.5 rounded-2xl p-4 text-left transition-all duration-300 ${active
+                                    ? "bg-primary/20 text-foreground border border-primary/60 shadow-[0_0_20px_-4px_rgba(59,130,246,0.35)]"
                                     : "bg-foreground/4 text-muted-foreground border border-border/40 hover:bg-foreground/8 hover:text-foreground"
-                                }`}
+                                  }`}
                               >
                                 <span
-                                  className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors ${
-                                    active
+                                  className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors ${active
                                       ? "bg-primary text-primary-foreground"
                                       : "bg-foreground/6 text-muted-foreground"
-                                  }`}
+                                    }`}
                                 >
                                   <Icon className="h-4 w-4" />
                                 </span>
@@ -354,11 +350,10 @@ export function ContactPage() {
                                   key={b.label}
                                   type="button"
                                   onClick={() => setSelectedBudget(b.label)}
-                                  className={`rounded-2xl p-4 text-left transition-all duration-300 ${
-                                    active
+                                  className={`rounded-2xl p-4 text-left transition-all duration-300 ${active
                                       ? "bg-primary/20 text-foreground border border-primary/60 shadow-[0_0_15px_-3px_rgba(168,85,247,0.3)] font-medium"
                                       : "bg-foreground/4 text-muted-foreground border border-border/40 hover:bg-foreground/8 hover:text-foreground"
-                                  }`}
+                                    }`}
                                 >
                                   <div className="flex items-center justify-between">
                                     <span className="text-sm font-semibold text-foreground">{b.label}</span>
@@ -384,11 +379,10 @@ export function ContactPage() {
                                   key={t}
                                   type="button"
                                   onClick={() => setSelectedTimeline(t)}
-                                  className={`rounded-xl px-3 py-3 text-center text-xs font-medium transition-all duration-300 ${
-                                    active
+                                  className={`rounded-xl px-3 py-3 text-center text-xs font-medium transition-all duration-300 ${active
                                       ? "bg-primary/20 text-foreground border border-primary/50 shadow-[0_0_12px_-3px_rgba(168,85,247,0.3)]"
                                       : "bg-foreground/4 text-muted-foreground border border-border/40 hover:bg-foreground/8 hover:text-foreground"
-                                  }`}
+                                    }`}
                                 >
                                   {t}
                                 </button>

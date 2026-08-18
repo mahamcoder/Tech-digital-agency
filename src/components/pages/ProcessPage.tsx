@@ -248,7 +248,7 @@ export function ProcessPage() {
             <SectionLabel>90-Day Roadmap</SectionLabel>
             <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
               Your First 90 Days{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
                 Mapped Out
               </span>
             </h2>
@@ -310,7 +310,7 @@ export function ProcessPage() {
           <SectionLabel>Principles</SectionLabel>
           <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
             How We Think About{" "}
-            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               Growth
             </span>
           </h2>

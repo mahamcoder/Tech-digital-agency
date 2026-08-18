@@ -83,7 +83,7 @@ export function WhyChooseUs() {
           <SectionLabel>Why Choose CanbeTech</SectionLabel>
           <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-5xl md:text-6xl">
             Engineering Excellence That{" "}
-            <span className="block sm:inline bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="block sm:inline bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               Compounds
             </span>
           </h2>

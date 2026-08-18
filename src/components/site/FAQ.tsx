@@ -4,25 +4,38 @@ import { Reveal, SectionLabel } from "./Reveal";
 
 const faqs = [
   {
-    q: "How quickly do we see results?",
-    a: "Most partners see meaningful efficiency gains inside the first 60 days. The first two weeks are diagnosis, weeks 3–4 build the blueprint, and from week 5 we ship weekly.",
+    q: "What services does CanbeTech offer?",
+    a: "We provide AI-powered software development, web and mobile applications, custom software solutions, UI/UX development, API integrations, and scalable digital products.",
   },
   {
-    q: "What does engagement look like?",
-    a: "A small senior pod — strategy, media, creative and analytics — embedded in your Slack with a shared live dashboard and a weekly growth cadence.",
+    q: "What types of businesses do you work with?",
+    a: "We work with startups, growing businesses, and established companies looking to build, improve, or scale their digital products.",
   },
   {
-    q: "Do you work with our in-house team?",
-    a: "Always. We plug into existing teams, raise the operating standard, and hand over documented systems rather than dependency.",
+    q: "Can you build a custom software solution from scratch?",
+    a: "Yes. We develop custom solutions based on your business requirements, including planning, UI/UX design, development, integrations, testing, and deployment.",
   },
   {
-    q: "How is pricing structured?",
-    a: "A flat monthly partnership fee based on scope and channel complexity — no media percentage, no hidden markups, no long lock-ins.",
+    q: "Do you use AI in your development process?",
+    a: "Yes. We use AI-assisted development workflows to accelerate development, improve productivity, automate repetitive tasks, and build intelligent features where they provide real business value.",
   },
   {
-    q: "Which channels do you run?",
-    a: "Paid search and social, programmatic, YouTube, retail media, lifecycle CRM and conversion-rate work, all measured under one attribution model.",
+    q: "How long does it take to build a website or software product?",
+    a: "The timeline depends on the project's scope, features, and complexity. A simple website may take a few weeks, while a custom software product can take several months.",
   },
+  {
+    q: "Can you integrate third-party APIs and services?",
+    a: "Yes. We can integrate payment gateways, authentication systems, CRMs, cloud services, AI APIs, analytics platforms, and other third-party services.",
+  },
+  {
+    q: "How do we start a project with CanbeTech?",
+    a: "Simply book a call or contact us with your idea. We'll discuss your goals, requirements, timeline, and recommended approach before moving forward.",
+  },
+  {
+    q: "Can you improve or rebuild an existing website or application?",
+    a: "Absolutely. We can audit your existing product, identify technical and UX issues, modernize the design, improve performance, and rebuild or enhance the system where needed.",
+  },
+
 ];
 
 export function FAQ() {
@@ -37,7 +50,7 @@ export function FAQ() {
           <SectionLabel>FAQ</SectionLabel>
           <h2 className="mt-6 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
             Questions,{" "}
-            <span className="block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               Answered Clearly
             </span>
           </h2>
@@ -72,8 +85,8 @@ export function FAQ() {
                     <span className="text-[15px] font-medium tracking-tight">{f.q}</span>
                     <span
                       className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-all duration-500 ${isOpen
-                          ? "rotate-45 border-primary/40 bg-[var(--gradient-cta)] text-primary-foreground"
-                          : "border-border text-muted-foreground"
+                        ? "rotate-45 border-primary/40 bg-[var(--gradient-cta)] text-primary-foreground"
+                        : "border-border text-muted-foreground"
                         }`}
                     >
                       <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">

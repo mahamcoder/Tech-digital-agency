@@ -202,8 +202,8 @@ export function IndustriesPage() {
                     transition={{ duration: 0.35, ease }}
                     onClick={() => setActiveTab(i)}
                     className={`glass group relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-7 transition-all duration-300 ${activeTab === i
-                        ? "border-primary/50 shadow-xl shadow-primary/10"
-                        : "hover:border-primary/30"
+                      ? "border-primary/50 shadow-xl shadow-primary/10"
+                      : "hover:border-primary/30"
                       }`}
                   >
                     <div
@@ -248,7 +248,7 @@ export function IndustriesPage() {
             <SectionLabel>Architecture Deep Dive</SectionLabel>
             <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
               Engineered Solutions by{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
                 Industry
               </span>
             </h2>
@@ -265,8 +265,8 @@ export function IndustriesPage() {
                 type="button"
                 onClick={() => setActiveTab(i)}
                 className={`rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 ${activeTab === i
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                    : "border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                  : "border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
                   }`}
               >
                 {ind.name}

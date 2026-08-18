@@ -63,27 +63,27 @@ export function Footer() {
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px]"
         style={{
           background:
-            "radial-gradient(65% 100% at 50% -6%, oklch(0.97 0.03 305 / 0.9) 0%, oklch(0.84 0.11 302 / 0.7) 14%, oklch(0.6 0.21 300 / 0.5) 30%, oklch(0.3 0.13 288 / 0.3) 52%, transparent 78%)",
+            "radial-gradient(65% 100% at 50% -6%, oklch(0.78 0.16 220 / 0.45) 0%, oklch(0.62 0.22 255 / 0.35) 18%, oklch(0.48 0.22 275 / 0.25) 36%, oklch(0.3 0.14 290 / 0.15) 55%, transparent 78%)",
         }}
       />
 
       <div className="mx-auto max-w-7xl px-5 pb-12 pt-14 md:px-10 md:pt-20">
         <Reveal className="text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-            Intelligent Software Solutions
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#06B6D4]">
+            AI-INFUSED EXCELLENCE
           </p>
-          <h2 className="mt-6 max-w-4xl mx-auto font-display text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-foreground sm:text-6xl md:text-7xl">
+          <h2 className="mt-6 max-w-4xl mx-auto font-display text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#F8FAFC] sm:text-6xl md:text-7xl">
             Systems That Keep{" "}
-            <span className="block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-[#06B6D4] via-[#2563FF] to-[#8B5CF6] bg-clip-text text-transparent">
               Growing, Long After Launch
             </span>
           </h2>
-          <p className="mt-6 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mt-6 mx-auto max-w-2xl text-base leading-relaxed text-[#CBD5E1] sm:text-lg">
             Hundreds of brands trust CanbeTech to build the growth infrastructure that compounds — not campaigns that expire the day they end.
           </p>
           <Link
             to="/contact"
-            className="btn-cta mt-8 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-medium text-primary-foreground"
+            className="btn-cta mt-8 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-[#F8FAFC]"
           >
             Schedule a Call
           </Link>
@@ -91,9 +91,12 @@ export function Footer() {
 
         <div className="glass mt-12 grid gap-10 rounded-[2rem] p-8 md:mt-16 md:grid-cols-[1.3fr_repeat(3,minmax(0,1fr))] md:p-12">
           <div>
-            <Link to="/" className="flex items-center gap-2 font-display text-2xl tracking-tight text-foreground">
-              <Logo size={26} />
-              CanbeTech<span className="text-primary">.</span>
+            <Link to="/" className="flex items-center gap-2.5 font-display text-2xl tracking-tight text-foreground">
+              <Logo size={32} />
+              <span className="font-bold">
+                Canbe<span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">Tech</span>
+                <span className="text-primary">.</span>
+              </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               CanbeTech builds production-grade growth systems for ambitious brands — engineering brand strategy, performance media, and lifecycle infrastructure that compounds.
@@ -110,7 +113,7 @@ export function Footer() {
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="h-3.5 w-3.5 text-primary" />
-                +92 302 6833531 | +92 305 7554620
+                +92 305 1545730 | +92 305 7554620
               </p>
             </div>
 

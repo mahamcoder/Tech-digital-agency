@@ -98,7 +98,7 @@ export function Testimonials() {
           <SectionLabel>Our customers</SectionLabel>
           <h2 className="mt-6 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
             Partners Who{" "}
-            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               Stay in Orbit
             </span>
           </h2>

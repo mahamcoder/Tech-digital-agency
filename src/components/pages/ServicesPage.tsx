@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { Reveal, SectionLabel } from "@/components/site/Reveal";
 import { PageHero } from "@/components/site/PageHero";
@@ -27,6 +27,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const capabilities = [
   {
+    slug: "mobile-app-development",
+    id: "mobile",
     icon: Smartphone,
     title: "Mobile App Development",
     body: "Cross-platform and native mobile applications with scalable architecture, modern UI, and high performance built for iOS and Android.",
@@ -39,6 +41,8 @@ const capabilities = [
     accent: "from-violet-500/20 to-transparent",
   },
   {
+    slug: "web-development",
+    id: "web",
     icon: Globe2,
     title: "Web Development",
     body: "Modern web applications with responsive design, scalable backend infrastructure, and optimized performance for high traffic volumes.",
@@ -51,6 +55,8 @@ const capabilities = [
     accent: "from-blue-500/20 to-transparent",
   },
   {
+    slug: "devops-cloud",
+    id: "devops",
     icon: Cpu,
     title: "AI & DevOps Engineering",
     body: "AI-powered development pipelines, CI/CD automation, cloud deployment, and infrastructure scaling for resilient systems.",
@@ -63,6 +69,8 @@ const capabilities = [
     accent: "from-cyan-500/20 to-transparent",
   },
   {
+    slug: "quality-assurance",
+    id: "qa",
     icon: ShieldCheck,
     title: "Quality Assurance & Testing",
     body: "Automated testing suites, performance profiling, and vulnerability assessments ensuring flawless software delivery.",
@@ -75,6 +83,8 @@ const capabilities = [
     accent: "from-emerald-500/20 to-transparent",
   },
   {
+    slug: "maintenance-upgrades",
+    id: "maintenance",
     icon: Wrench,
     title: "Maintenance & Upgrades",
     body: "24/7 system monitoring, performance tuning, regular security patches, and legacy code modernization.",
@@ -87,6 +97,8 @@ const capabilities = [
     accent: "from-amber-500/20 to-transparent",
   },
   {
+    slug: "project-management",
+    id: "project-management",
     icon: Kanban,
     title: "Agile Project Management",
     body: "Agile planning, sprint execution, risk mitigation, and transparent delivery tracking to ship software on time and budget.",
@@ -160,6 +172,51 @@ const engagementModels = [
 
 export function ServicesPage() {
   const [activeService, setActiveService] = useState(0);
+
+  // Parse URL query parameter (e.g. /services?service=mobile-app-development#capabilities)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleLocationChange = () => {
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam =
+        params.get("service") ||
+        params.get("tab") ||
+        params.get("capability") ||
+        window.location.hash.replace("#", "");
+
+      if (serviceParam) {
+        const foundIndex = capabilities.findIndex(
+          (c, idx) =>
+            c.slug.toLowerCase() === serviceParam.toLowerCase() ||
+            c.id.toLowerCase() === serviceParam.toLowerCase() ||
+            c.title.toLowerCase().replace(/\s+/g, "-").includes(serviceParam.toLowerCase()) ||
+            String(idx) === serviceParam
+        );
+
+        if (foundIndex !== -1) {
+          setActiveService(foundIndex);
+
+          // Smooth scroll to capabilities section
+          setTimeout(() => {
+            const el = document.getElementById("capabilities");
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }, 180);
+        }
+      }
+    };
+
+    handleLocationChange();
+    window.addEventListener("popstate", handleLocationChange);
+    window.addEventListener("hashchange", handleLocationChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+      window.removeEventListener("hashchange", handleLocationChange);
+    };
+  }, []);
 
   // Estimator state
   const [teamSize, setTeamSize] = useState(3);
@@ -265,12 +322,12 @@ export function ServicesPage() {
       </PageHero>
 
       {/* ─── CAPABILITIES SWITCHER ─── */}
-      <section className="relative mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
+      <section id="capabilities" className="relative mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20 scroll-mt-28">
         <Reveal className="text-left">
           <SectionLabel>Full-Spectrum Engineering</SectionLabel>
           <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
             Modern Technologies,{" "}
-            <span className="block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               Flawless Execution
             </span>
           </h2>
@@ -379,7 +436,7 @@ export function ServicesPage() {
             </p>
             <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl">
               Built With Cutting-Edge{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
                 Tech Stack
               </span>
             </h2>
@@ -411,7 +468,7 @@ export function ServicesPage() {
           <SectionLabel>Engagement Options</SectionLabel>
           <h2 className="mt-6 max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
             Flexible Models,{" "}
-            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               Predictable Results
             </span>
           </h2>

@@ -40,7 +40,15 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   useLenis();
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(() => {
+    if (typeof window !== "undefined") {
+      return Boolean(
+        sessionStorage.getItem("canbetech_preloader_seen") ||
+          localStorage.getItem("canbetech_preloader_seen")
+      );
+    }
+    return false;
+  });
 
   return (
     <main className="relative min-h-screen bg-background">
@@ -54,7 +62,7 @@ function Index() {
       <Services isTeaser={true} />
 
       {/* Trusted Tech Logos */}
-      <TrustedTech />
+      {/* <TrustedTech /> */}
 
       {/* Portfolio Teaser */}
       <Projects isTeaser={true} />

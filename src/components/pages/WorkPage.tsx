@@ -12,16 +12,15 @@ import {
   BarChart3,
   CheckCircle2,
   ExternalLink,
+  Smartphone,
+  Globe,
 } from "lucide-react";
-import p1 from "@/assets/project-1.jpg";
-import p2 from "@/assets/project-2.jpg";
-import p3 from "@/assets/project-3.jpg";
-import p4 from "@/assets/project-4.jpg";
+import { ProjectMockup } from "@/components/site/ProjectMockup";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-type CaseStudy = {
-  img: string;
+export type CaseStudy = {
+  id: string;
   client: string;
   tag: string;
   category: string;
@@ -33,99 +32,273 @@ type CaseStudy = {
   strategy: string;
   execution: string[];
   stats: { value: string; label: string }[];
-  liveUrl?: string;
+  officialWebsite: string;
+  mobileApp: string;
+  liveUrl: string;
 };
 
-const cases: CaseStudy[] = [
+export const cases: CaseStudy[] = [
   {
-    img: p1,
-    client: "Nova Finance",
-    tag: "Analytics & Performance",
-    category: "Performance Media",
-    result: "-42% CAC",
-    metric: "-42%",
-    note: "cost per acquisition reduction",
+    id: "maven-clinic",
+    client: "Maven Clinic",
+    tag: "Healthcare / Virtual Care",
+    category: "Healthcare",
+    result: "2.4M+ Patients",
+    metric: "2.4M+",
+    note: "virtual care consultations delivered",
     span: "lg:col-span-7",
-    challenge: "Nova's blended CAC had risen 3x in 18 months as they scaled past $5M ARR. Their attribution was broken and creative had staled.",
-    strategy: "We rebuilt their measurement model, launched a full-funnel creative testing system, and shifted budget from bottom-funnel search to mid-funnel social proof campaigns.",
-    execution: ["Attribution model redesign", "Creative testing framework", "Budget reallocation across 4 channels", "Weekly optimization cadence"],
-    stats: [
-      { value: "-42%", label: "CAC Reduction" },
-      { value: "3.2x", label: "Pipeline Growth" },
-      { value: "68%", label: "Faster Sales Cycle" },
-      { value: "$4.1M", label: "Revenue Added" },
+    challenge: "A virtual healthcare ecosystem requiring seamless multi-channel patient-to-specialist connectivity, strict HIPAA compliance, and frictionless video consultation scaling.",
+    strategy: "Engineered an omnichannel telehealth platform integrating real-time WebRTC video & messaging, automated specialist appointment matching, digital prescription pipelines, and care program tracking.",
+    execution: [
+      "WebRTC HD video consultation & encrypted patient chat",
+      "Cross-platform iOS & Android patient mobile applications",
+      "Specialist care matching & dynamic scheduling engine",
+      "Digital prescriptions & EHR synchronization pipelines",
     ],
-    liveUrl: "https://novafinance.io",
+    stats: [
+      { value: "2.4M+", label: "Patients Served" },
+      { value: "98%", label: "Care Satisfaction" },
+      { value: "350+", label: "Specialty Sub-tracks" },
+      { value: "99.99%", label: "HIPAA Uptime SLA" },
+    ],
+    officialWebsite: "https://www.mavenclinic.com/",
+    mobileApp: "Google Play · Apple App Store",
+    liveUrl: "https://www.mavenclinic.com/",
   },
   {
-    img: p2,
-    client: "Halo Health",
-    tag: "Brand & Creative",
-    category: "Creative Studio",
-    result: "3.1x ROAS",
-    metric: "+312%",
-    note: "qualified pipeline in 9 months",
+    id: "track-pod",
+    client: "Track-POD",
+    tag: "Logistics / Delivery Management",
+    category: "Logistics",
+    result: "99.4% On-Time",
+    metric: "99.4%",
+    note: "on-time delivery dispatch rate",
     span: "lg:col-span-5",
-    challenge: "A DTC wellness brand struggling with creative fatigue across Meta and TikTok. Static ads were underperforming and the brand lacked visual consistency.",
-    strategy: "Built a modular creative system with reusable visual components, UGC strategy, and a testing matrix that shipped 40+ variants monthly.",
-    execution: ["Brand identity refresh", "UGC creator network", "40+ monthly ad variants", "Cross-platform creative optimization"],
-    stats: [
-      { value: "3.1x", label: "Blended ROAS" },
-      { value: "40+", label: "Monthly Variants" },
-      { value: "2.4x", label: "CTR Improvement" },
-      { value: "$2.8M", label: "Revenue Lift" },
+    challenge: "Complex last-mile logistics operations suffering from paper-based manifests, inaccurate route calculations, lack of real-time GPS visibility, and delayed proof of delivery.",
+    strategy: "Built a cloud dispatch dashboard connected to a native mobile driver app featuring dynamic route optimization, real-time live vehicle tracking, electronic proof of delivery (ePOD), barcode scanning, and instant signature capture.",
+    execution: [
+      "Multi-stop AI route planning algorithm",
+      "Live GPS tracking & driver status dashboard",
+      "Electronic Proof of Delivery (signatures & photos)",
+      "Offline-first driver mobile app syncing",
     ],
-    liveUrl: "https://halohealth.app",
+    stats: [
+      { value: "99.4%", label: "On-Time Deliveries" },
+      { value: "-28%", label: "Fuel & Route Costs" },
+      { value: "100%", label: "Paperless ePOD" },
+      { value: "15M+", label: "Parcels Tracked" },
+    ],
+    officialWebsite: "https://www.track-pod.com/",
+    mobileApp: "Google Play — Delivery Driver App",
+    liveUrl: "https://www.track-pod.com/",
   },
   {
-    img: p3,
-    client: "Lumen Labs",
-    tag: "Commerce Launch",
-    category: "CRM & Analytics",
-    result: "$18M GMV",
-    metric: "+128%",
-    note: "net revenue retention lift",
+    id: "lasa-property",
+    client: "LASA Property Management",
+    tag: "Property / Rental Management",
+    category: "PropTech",
+    result: "10k+ Units",
+    metric: "10k+",
+    note: "properties & units under management",
     span: "lg:col-span-5",
-    challenge: "Pre-launch B2B SaaS with zero brand awareness and a complex product requiring high-touch education.",
-    strategy: "Designed a content-led acquisition funnel paired with lifecycle email journeys that educated and converted enterprise prospects.",
-    execution: ["Content strategy & SEO foundation", "Email nurture sequences", "Webinar funnel system", "Enterprise landing pages"],
-    stats: [
-      { value: "$18M", label: "GMV Generated" },
-      { value: "+128%", label: "NRR Lift" },
-      { value: "4.2x", label: "Email ROI" },
-      { value: "34%", label: "Open Rate" },
+    challenge: "Fragmented property management workflows across owners, tenants, applicants, agents, inspectors, and maintenance contractors causing high vacancy turnaround and billing disputes.",
+    strategy: "Developed a unified multi-role property ecosystem that centralizes online leasing, automated rent collection, digital work orders, tenant screening, and maintenance scheduling.",
+    execution: [
+      "Multi-role portal for owners, tenants, agents & staff",
+      "Automated ACH & Card rent payment engine",
+      "Maintenance dispatch & vendor work orders tracker",
+      "Digital lease generation & compliant e-signatures",
     ],
-    liveUrl: "https://lumenlabs.ai",
+    stats: [
+      { value: "10k+", label: "Units Managed" },
+      { value: "-45%", label: "Work Order Resolution Time" },
+      { value: "99.2%", label: "On-Time Rent Collection" },
+      { value: "$140M+", label: "Annual Rent Processed" },
+    ],
+    officialWebsite: "https://lasapm.com/",
+    mobileApp: "Google Play — LASAEPM",
+    liveUrl: "https://lasapm.com/",
   },
   {
-    img: p4,
-    client: "Atlas Retail",
-    tag: "Lifecycle CRM",
-    category: "Performance Media",
-    result: "+68% LTV",
-    metric: "6.8x",
-    note: "return on ad spend at scale",
+    id: "beli",
+    client: "Beli",
+    tag: "Restaurant Discovery / Social",
+    category: "Social Discovery",
+    result: "5M+ Ratings",
+    metric: "5M+",
+    note: "restaurant bookmarks & ranking lists",
     span: "lg:col-span-7",
-    challenge: "Multi-channel retailer with $50M+ revenue but no retention strategy. 78% of revenue came from one-time buyers.",
-    strategy: "Implemented lifecycle CRM with behavioral segmentation, win-back flows, VIP tiers, and predictive churn modeling.",
-    execution: ["Full CRM migration", "12 automated email flows", "SMS integration", "VIP loyalty program design"],
-    stats: [
-      { value: "+68%", label: "LTV Increase" },
-      { value: "6.8x", label: "ROAS at Scale" },
-      { value: "42%", label: "Repeat Rate" },
-      { value: "$12M", label: "Attributed Revenue" },
+    challenge: "Traditional restaurant review platforms were cluttered with fake ratings and lacked personalized social recommendations from trusted friends.",
+    strategy: "Engineered an interactive, gamified social food discovery app where foodies rank dining spots in tier lists, map places visited, bookmark want-to-go spots, and get algorithmic recommendations.",
+    execution: [
+      "Interactive map with customized map pins & smart filters",
+      "Algorithmic personalized taste recommendations",
+      "Social activity feeds & friend tier lists",
+      "High-speed photo review upload & indexing",
     ],
-    liveUrl: "https://atlasretail.com",
+    stats: [
+      { value: "5M+", label: "Ratings & Lists" },
+      { value: "4.9 ★", label: "App Store Rating" },
+      { value: "6.2x", label: "Monthly User Engagement" },
+      { value: "85+", label: "Global Metro Cities" },
+    ],
+    officialWebsite: "https://beliapp.com/",
+    mobileApp: "Google Play · Apple App Store",
+    liveUrl: "https://beliapp.com/",
+  },
+  {
+    id: "zama-app",
+    client: "ZamaApp",
+    tag: "School Management / EdTech",
+    category: "EdTech",
+    result: "50k+ Students",
+    metric: "50k+",
+    note: "students & faculty managed",
+    span: "lg:col-span-7",
+    challenge: "Schools struggled with manual paper attendance, delayed fee collection notifications, disjointed grade reporting, and lack of real-time parent-teacher communication.",
+    strategy: "Created an integrated school management ERP and parent mobile portal providing automated attendance alerts, online fee payments, report card generation, and exam schedules.",
+    execution: [
+      "Admin & Teacher gradebook and exam dashboard",
+      "Parent mobile app with instant push notifications",
+      "Digital fee ledger & online invoice payments",
+      "Automated daily SMS & in-app attendance alerts",
+    ],
+    stats: [
+      { value: "50k+", label: "Active Students" },
+      { value: "92%", label: "Parent Engagement" },
+      { value: "-75%", label: "Administrative Paperwork" },
+      { value: "180+", label: "Partner Institutions" },
+    ],
+    officialWebsite: "http://zamaschool.pk/",
+    mobileApp: "Google Play — ZamaApp",
+    liveUrl: "http://zamaschool.pk/",
+  },
+  {
+    id: "traveloup",
+    client: "Traveloup",
+    tag: "Travel Marketplace / Booking",
+    category: "Marketplace",
+    result: "100k+ Tours",
+    metric: "100k+",
+    note: "itineraries & trips booked",
+    span: "lg:col-span-5",
+    challenge: "Travelers faced fragmented tour options without verified operator credibility, while tour operators lacked digital tooling for booking inventory and real-time customer messaging.",
+    strategy: "Built a two-sided travel marketplace enabling travelers to discover, customize, and book verified curated excursions, with dedicated vendor portals for itinerary publishing and booking analytics.",
+    execution: [
+      "Custom tour discovery & multi-currency booking checkout",
+      "Operator SaaS portal for inventory & promotions",
+      "Interactive day-by-day itinerary visualizer",
+      "Real-time traveler-operator messaging & support",
+    ],
+    stats: [
+      { value: "100k+", label: "Bookings Processed" },
+      { value: "450+", label: "Verified Tour Operators" },
+      { value: "96%", label: "Booking Completion Rate" },
+      { value: "$22M+", label: "Gross Marketplace Value" },
+    ],
+    officialWebsite: "https://traveloup.pk/",
+    mobileApp: "Google Play — Traveloup",
+    liveUrl: "https://traveloup.pk/",
+  },
+  {
+    id: "farm4trade",
+    client: "Farm4Trade",
+    tag: "Smart Farming / Livestock Management",
+    category: "AgriTech",
+    result: "1M+ Animals",
+    metric: "1M+",
+    note: "livestock & farm assets tracked",
+    span: "lg:col-span-5",
+    challenge: "Large-scale livestock farmers lacked digital traceability for animal health, feeding optimization, breeding cycles, and veterinary compliance across decentralized ranches.",
+    strategy: "Architected a cloud-based smart livestock management suite with RFID tracking, weight/feeding intelligence, veterinary health logs, and automated farm task assignment.",
+    execution: [
+      "RFID animal identification & genealogical registry",
+      "Feed rationing & growth curve forecasting",
+      "Veterinary vaccination schedule & disease alerts",
+      "Offline mobile app sync for remote farm zones",
+    ],
+    stats: [
+      { value: "1M+", label: "Livestock Monitored" },
+      { value: "+32%", label: "Feed Efficiency" },
+      { value: "-40%", label: "Mortality Reduction" },
+      { value: "30+", label: "Agricultural Countries" },
+    ],
+    officialWebsite: "https://www.farm4trade.com/",
+    mobileApp: "Google Play — Farm4Trade",
+    liveUrl: "https://www.farm4trade.com/",
+  },
+  {
+    id: "lunga",
+    client: "Lunga",
+    tag: "Farm Management / Agriculture",
+    category: "AgriTech",
+    result: "40k+ Farmers",
+    metric: "40k+",
+    note: "smallholder farmers empowered",
+    span: "lg:col-span-7",
+    challenge: "Smallholder livestock farmers struggled with lack of affordable veterinary diagnostics and fair market access to buy quality feed and sell farm output.",
+    strategy: "Delivered an end-to-end farm management and agricultural commerce app combining digital herd recordkeeping, veterinary telemedicine, and a B2B agri-marketplace.",
+    execution: [
+      "Mobile farm recordkeeping & productivity reports",
+      "On-demand veterinary advisory and diagnostics",
+      "Input procurement marketplace (seeds, feeds, vaccines)",
+      "Direct-to-buyer farm commodity marketplace",
+    ],
+    stats: [
+      { value: "40k+", label: "Registered Farmers" },
+      { value: "+45%", label: "Farmer Income Increase" },
+      { value: "24hr", label: "Vet Advisory Response" },
+      { value: "$8.5M+", label: "Trade Volume" },
+    ],
+    officialWebsite: "https://phemaagri.com/",
+    mobileApp: "Google Play — Lunga",
+    liveUrl: "https://phemaagri.com/",
+  },
+  {
+    id: "jumeni",
+    client: "Jumeni",
+    tag: "Waste Management / Collection",
+    category: "Logistics",
+    result: "500k+ Pickups",
+    metric: "500k+",
+    note: "waste collection tasks completed",
+    span: "lg:col-span-12",
+    challenge: "Municipal and commercial waste collection operators faced scheduling chaos, uncollected customer bins, manual billing friction, and unoptimized truck fleet routes.",
+    strategy: "Engineered an enterprise waste management and collection platform enabling customers to book recurring pickups while providing dispatchers with automated fleet routing and payment reconciliation.",
+    execution: [
+      "Customer mobile app for one-time & recurring pickups",
+      "Smart truck route optimization & GPS driver tracking",
+      "Automated billing, invoicing & digital wallet payments",
+      "Service history, customer support ticketing & SLA logs",
+    ],
+    stats: [
+      { value: "500k+", label: "Pickups Completed" },
+      { value: "99.6%", label: "Collection SLA Adherence" },
+      { value: "-34%", label: "Fleet Mileage Reduced" },
+      { value: "65k+", label: "Homes & Businesses Served" },
+    ],
+    officialWebsite: "https://jumeni.com/",
+    mobileApp: "Google Play — Jumeni",
+    liveUrl: "https://jumeni.com/",
   },
 ];
 
-const filters = ["All", "Performance Media", "Creative Studio", "CRM & Analytics"];
+const filters = [
+  "All",
+  "Healthcare",
+  "Logistics",
+  "PropTech",
+  "Social Discovery",
+  "EdTech",
+  "Marketplace",
+  "AgriTech",
+];
 
 const metricStats = [
-  { icon: DollarSign, value: "$240M+", label: "Media Managed" },
-  { icon: Users, value: "120+", label: "Brands Scaled" },
-  { icon: TrendingUp, value: "4.8x", label: "Avg. Blended ROAS" },
-  { icon: BarChart3, value: "94%", label: "Client Retention" },
+  { icon: DollarSign, value: "$240M+", label: "Value Handled" },
+  { icon: Users, value: "10M+", label: "Active Users" },
+  { icon: TrendingUp, value: "99.4%", label: "Avg. Platform SLA" },
+  { icon: BarChart3, value: "9+", label: "Live Production Ecosystems" },
 ];
 
 export function WorkPage() {
@@ -156,7 +329,10 @@ export function WorkPage() {
     };
   }, [selectedCase]);
 
-  const filtered = activeFilter === "All" ? cases : cases.filter((c) => c.category === activeFilter);
+  const filtered =
+    activeFilter === "All"
+      ? cases
+      : cases.filter((c) => c.category === activeFilter);
 
   return (
     <>
@@ -166,13 +342,13 @@ export function WorkPage() {
         aiVariant="work"
         title={
           <>
-            Outcomes, Not{" "}
-            <span className="mt-1 block bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
-              Impressions
+            Real-World Products,{" "}
+            <span className="mt-1 block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
+              Proven Engineering
             </span>
           </>
         }
-        description="Real results from real partnerships. Every case study is measured by the metrics that matter — revenue, margin, and sustainable growth."
+        description="A curated collection of real web platforms, mobile apps, backend systems, and operational workflows engineered across diverse industries."
       >
         {/* Metric stat cards */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -207,11 +383,10 @@ export function WorkPage() {
                 key={f}
                 type="button"
                 onClick={() => setActiveFilter(f)}
-                className={`rounded-full px-4 py-2 text-[13px] transition-all duration-300 ${
-                  activeFilter === f
+                className={`rounded-full px-4 py-2 text-[13px] transition-all duration-300 ${activeFilter === f
                     ? "bg-primary/15 text-primary font-medium border border-primary/30"
                     : "border border-border text-muted-foreground hover:border-primary/25 hover:text-foreground"
-                }`}
+                  }`}
               >
                 {f}
               </button>
@@ -238,30 +413,30 @@ export function WorkPage() {
                   onClick={() => setSelectedCase(p)}
                   className="glass group relative h-full cursor-pointer overflow-hidden rounded-[2rem] p-2 transition-colors duration-500 hover:border-primary/40"
                 >
-                  <div className="relative overflow-hidden rounded-[1.6rem]">
-                    <img
-                      src={p.img}
-                      alt={`${p.client} — ${p.tag} case study`}
-                      width={1024}
-                      height={768}
-                      loading="lazy"
-                      className="h-[260px] w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] sm:h-[320px]"
+                  <div className="relative h-[260px] w-full overflow-hidden rounded-[1.6rem] sm:h-[320px]">
+                    <ProjectMockup
+                      id={p.id}
+                      className="h-full w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
-                    <span className="absolute left-4 top-4 rounded-full border border-primary/30 bg-background/60 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-primary backdrop-blur-md">
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+                    <span className="absolute left-4 top-4 rounded-full border border-slate-200/80 bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-800 shadow-sm backdrop-blur-md">
                       {p.tag}
                     </span>
-                    <span className="absolute bottom-4 right-4 rounded-full bg-background/70 px-3 py-1.5 text-xs font-medium text-foreground backdrop-blur-md transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                      View study →
+                    <span className="btn-cta absolute bottom-4 right-4 rounded-full px-3.5 py-1.5 text-xs font-semibold text-white shadow-md backdrop-blur-md transition-all hover:scale-105">
+                      View case study →
                     </span>
                   </div>
 
                   <div className="flex items-end justify-between gap-4 px-4 pb-4 pt-5">
                     <div className="min-w-0">
-                      <h3 className="font-display text-xl tracking-tight text-foreground">{p.client}</h3>
-                      <p className="mt-1 text-xs text-muted-foreground">Growth partnership</p>
+                      <h3 className="font-display text-xl font-bold tracking-tight text-foreground">
+                        {p.client}
+                      </h3>
+                      <p className="mt-1 text-xs text-slate-300">{p.note}</p>
                     </div>
-                    <span className="shrink-0 font-display text-lg text-primary">{p.result}</span>
+                    <span className="shrink-0 font-display text-lg font-semibold text-primary">
+                      {p.result}
+                    </span>
                   </div>
                 </motion.article>
               </motion.div>
@@ -297,9 +472,12 @@ export function WorkPage() {
               className="fixed right-0 top-0 z-[70] flex h-full w-full max-w-xl flex-col overflow-y-auto bg-background border-l border-border/50 shadow-2xl"
             >
               <div className="sticky top-0 z-10 flex items-center justify-between bg-background/90 px-6 py-4 backdrop-blur-md border-b border-border/50">
-                <h2 className="font-display text-lg font-semibold tracking-tight text-foreground">
-                  {selectedCase.client}
-                </h2>
+                <div>
+                  <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
+                    {selectedCase.client}
+                  </h2>
+                  <p className="text-xs text-primary font-medium">{selectedCase.tag}</p>
+                </div>
                 <button
                   type="button"
                   onClick={() => setSelectedCase(null)}
@@ -310,16 +488,41 @@ export function WorkPage() {
               </div>
 
               <div className="flex-1 px-6 py-8">
-                <img
-                  src={selectedCase.img}
-                  alt={selectedCase.client}
-                  className="w-full rounded-2xl object-cover h-48 border border-white/10"
-                />
+                <div className="relative h-56 w-full overflow-hidden rounded-2xl border border-slate-200/80 shadow-md">
+                  <ProjectMockup id={selectedCase.id} className="h-full w-full" />
+                </div>
+
+                {/* Reference directory quick links */}
+                <div className="mt-5 rounded-2xl bg-white/5 p-4 border border-white/10 space-y-2 text-xs">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="flex items-center gap-1.5 text-slate-400">
+                      <Globe className="h-3.5 w-3.5 text-primary" /> Official Website:
+                    </span>
+                    <a
+                      href={selectedCase.officialWebsite}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-primary hover:underline truncate max-w-[240px]"
+                    >
+                      {selectedCase.officialWebsite}
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-between gap-2 border-t border-white/5 pt-2">
+                    <span className="flex items-center gap-1.5 text-slate-400">
+                      <Smartphone className="h-3.5 w-3.5 text-cyan-400" /> Mobile Application:
+                    </span>
+                    <span className="font-medium text-foreground">
+                      {selectedCase.mobileApp}
+                    </span>
+                  </div>
+                </div>
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   {selectedCase.stats.map((s) => (
                     <div key={s.label} className="rounded-xl bg-foreground/5 p-4 border border-white/5">
-                      <p className="font-display text-xl font-semibold tracking-tight text-primary">{s.value}</p>
+                      <p className="font-display text-xl font-semibold tracking-tight text-primary">
+                        {s.value}
+                      </p>
                       <p className="mt-1 text-[11px] text-muted-foreground">{s.label}</p>
                     </div>
                   ))}
@@ -327,18 +530,28 @@ export function WorkPage() {
 
                 <div className="mt-8 space-y-6">
                   <div>
-                    <h4 className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">The Challenge</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{selectedCase.challenge}</p>
+                    <h4 className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">
+                      The Challenge
+                    </h4>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                      {selectedCase.challenge}
+                    </p>
                   </div>
                   <div>
-                    <h4 className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">Our Strategy</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{selectedCase.strategy}</p>
+                    <h4 className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">
+                      Our Strategy & Architecture
+                    </h4>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                      {selectedCase.strategy}
+                    </p>
                   </div>
                   <div>
-                    <h4 className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">Execution</h4>
+                    <h4 className="text-[11px] uppercase tracking-[0.2em] text-primary font-semibold">
+                      Key Execution & Features
+                    </h4>
                     <ul className="mt-3 space-y-2">
                       {selectedCase.execution.map((e) => (
-                        <li key={e} className="flex items-center gap-2.5 text-sm text-foreground/80">
+                        <li key={e} className="flex items-center gap-2.5 text-sm text-foreground/90">
                           <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
                           {e}
                         </li>
@@ -357,7 +570,7 @@ export function WorkPage() {
                       className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-3.5 text-xs font-semibold text-primary transition-all hover:bg-primary/20 hover:scale-[1.02]"
                     >
                       <ExternalLink className="h-4 w-4" />
-                      Visit Live Site
+                      Visit Official Website
                     </a>
                   )}
                   <Link
@@ -383,17 +596,17 @@ export function WorkPage() {
             <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl">
               Ready to Build{" "}
               <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
-                Your Case Study?
+                Your Next Product?
               </span>
             </h2>
-            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Let's discuss what compounding growth looks like for your brand.
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-slate-300">
+              Let's engineer and scale your web and mobile product ecosystem together.
             </p>
             <Link
               to="/contact"
               className="btn-cta mt-8 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-primary-foreground"
             >
-              Book a diagnostic
+              Start your Project
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

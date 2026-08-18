@@ -34,14 +34,14 @@ export function WhatsAppButton({
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 10, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="pointer-events-none absolute right-16 whitespace-nowrap rounded-2xl border border-white/20 bg-[#161328]/90 px-4.5 py-2.5 shadow-2xl backdrop-blur-2xl"
+              className="pointer-events-none absolute right-16 whitespace-nowrap rounded-2xl border border-[#64748B]/30 bg-[#0E1526]/95 px-4.5 py-2.5 shadow-2xl backdrop-blur-2xl"
             >
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-violet-400" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#06B6D4] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#06B6D4]" />
                 </span>
-                <span className="text-sm font-semibold tracking-wide text-white">
+                <span className="text-sm font-semibold tracking-wide text-[#F8FAFC]">
                   Chat on WhatsApp
                 </span>
               </div>
@@ -49,11 +49,11 @@ export function WhatsAppButton({
           )}
         </AnimatePresence>
 
-        {/* Outer Glowing Pulsing Ring (Matching Website Violet Theme) */}
-        <span className="absolute -inset-2 animate-pulse rounded-full bg-violet-600/30 blur-md transition-opacity duration-300 group-hover:bg-violet-500/50" />
+        {/* Outer Glowing Pulsing Ring (Matching CanbeTech Blue Theme) */}
+        <span className="absolute -inset-2 animate-pulse rounded-full bg-[#2563FF]/30 blur-md transition-opacity duration-300 group-hover:bg-[#2563FF]/50" />
 
-        {/* Main Sleek Floating Button (Website Theme Color) */}
-        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-[#6366f1] via-[#7c3aed] to-[#9333ea] shadow-xl shadow-violet-950/60 ring-2 ring-white/25 transition-all duration-300 group-hover:scale-110 group-hover:shadow-violet-600/60 active:scale-95">
+        {/* Main Sleek Floating Button (CanbeTech Royal Blue) */}
+        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#2563FF] shadow-xl shadow-[#2563FF]/35 ring-2 ring-white/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-[#1D4ED8] group-hover:shadow-[#2563FF]/55 active:scale-95">
           {/* White WhatsApp Speech Bubble + Handset Icon */}
           <svg
             viewBox="0 0 24 24"

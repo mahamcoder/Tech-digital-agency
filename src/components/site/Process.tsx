@@ -54,7 +54,7 @@ export function Process() {
           <SectionLabel>How We Work</SectionLabel>
           <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
             Our 4-Step{" "}
-            <span className="bg-gradient-to-r from-violet-400 via-primary to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent">
               Engineering Process
             </span>
           </h2>
